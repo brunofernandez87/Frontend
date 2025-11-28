@@ -1,0 +1,152 @@
+[
+  {
+    "id_product": 1,
+    "name": "Fertilizante NPK Triple 15",
+    "description": "Fertilizante granulado de liberación lenta con una proporción equilibrada de Nitrógeno, Fósforo y Potasio (15-15-15), ideal para la fase de desarrollo inicial y mantenimiento de la mayoría de los cultivos extensivos.",
+    "category": "Fertilizantes Químicos",
+    "price": 45.5,
+    "stock": 850,
+    "create": "2024-01-10",
+    "image": "https://picsum.photos/id/10/300/300"
+  },
+  {
+    "id_product": 2,
+    "name": "Insecticida de Contacto y Sistémico",
+    "description": "Insecticida de amplio espectro para el control de plagas masticadoras y chupadoras (pulgones, orugas y mosca blanca). Formulación líquida concentrada.",
+    "category": "Fitosanitarios - Insecticidas",
+    "price": 89.9,
+    "stock": 420,
+    "create": "2024-02-15",
+    "image": "https://picsum.photos/id/20/300/300"
+  },
+  {
+    "id_product": 3,
+    "name": "Semilla de Maíz Híbrido de Alto Rendimiento",
+    "description": "Semilla de maíz híbrido, ciclo intermedio, con alta resistencia a enfermedades comunes y adaptabilidad a diversas condiciones climáticas. Tratada con fungicida e insecticida.",
+    "category": "Semillas",
+    "price": 120.0,
+    "stock": 600,
+    "create": "2024-03-01",
+    "image": "https://picsum.photos/id/30/300/300"
+  },
+  {
+    "id_product": 4,
+    "name": "Fungicida Preventivo para Cereales",
+    "description": "Fungicida de acción preventiva y curativa, eficaz contra la roya y otras enfermedades foliares en cultivos de trigo y cebada. Dosis por hectárea claramente especificada.",
+    "category": "Fitosanitarios - Fungicidas",
+    "price": 75.25,
+    "stock": 310,
+    "create": "2024-04-20",
+    "image": "https://picsum.photos/id/40/300/300"
+  },
+  {
+    "id_product": 5,
+    "name": "Herbicida Post-Emergente Selectivo",
+    "description": "Herbicida selectivo para el control de malezas de hoja ancha en cultivos de soja y leguminosas. Aplicación en post-emergencia temprana.",
+    "category": "Fitosanitarios - Herbicidas",
+    "price": 55.7,
+    "stock": 580,
+    "create": "2024-05-18",
+    "image": "https://picsum.photos/id/50/300/300"
+  },
+  {
+    "id_product": 6,
+    "name": "Bioestimulante a base de Aminoácidos",
+    "description": "Producto orgánico que mejora la respuesta de la planta al estrés (hídrico, térmico), promueve la floración y el cuajado de frutos. Aplicación foliar.",
+    "category": "Bioinsumos y Bioestimulantes",
+    "price": 39.95,
+    "stock": 740,
+    "create": "2024-06-05",
+    "image": "https://picsum.photos/id/60/300/300"
+  },
+  {
+    "id_product": 7,
+    "name": "Coadyuvante No Iónico Siliconado",
+    "description": "Aditivo que mejora la dispersión, humectación y penetración de las soluciones de agroquímicos, optimizando la eficacia de fungicidas e insecticidas.",
+    "category": "Aditivos y Coadyuvantes",
+    "price": 22.1,
+    "stock": 910,
+    "create": "2024-07-12",
+    "image": "https://picsum.photos/id/70/300/300"
+  },
+  {
+    "id_product": 8,
+    "name": "Inoculante Líquido para Soja (Bradyrhizobium)",
+    "description": "Inoculante biológico para tratamiento de semillas de soja, que asegura una óptima fijación biológica de nitrógeno en el suelo. Base líquida de fácil aplicación.",
+    "category": "Bioinsumos y Bioestimulantes",
+    "price": 31.4,
+    "stock": 500,
+    "create": "2024-08-01",
+    "image": "https://picsum.photos/id/80/300/300"
+  },
+  {
+    "id_product": 9,
+    "name": "Kit de Análisis Rápido de Suelo (pH y NPK)",
+    "description": "Kit portátil para realizar 50 pruebas rápidas de pH, Nitrógeno, Fósforo y Potasio en el campo. Ideal para la toma de decisiones rápidas sobre fertilización.",
+    "category": "Equipos y Herramientas",
+    "price": 150.0,
+    "stock": 150,
+    "create": "2024-09-10",
+    "image": "https://picsum.photos/id/90/300/300"
+  },
+  {
+    "id_product": 10,
+    "name": "Trampas de Feromonas para Polilla del Tomate",
+    "description": "Paquete de 10 trampas de agua con dispensadores de feromonas para monitoreo y control masivo de la polilla del tomate (Tuta absoluta) en invernaderos y campo.",
+    "category": "Control Biológico y Trampeo",
+    "price": 68.0,
+    "stock": 250,
+    "create": "2024-10-05",
+    "image": "https://picsum.photos/id/100/300/300"
+  },
+  {
+    "id_product": 11,
+    "name": "Regulador de Crecimiento Vegetal (Ácido Giberélico)",
+    "description": "Regulador de crecimiento que estimula la elongación celular y la germinación. Utilizado en frutales y hortalizas para mejorar el tamaño y calidad del fruto.",
+    "category": "Reguladores de Crecimiento",
+    "price": 92.5,
+    "stock": 210,
+    "create": "2024-11-01",
+    "image": "https://picsum.photos/id/110/300/300"
+  },
+  {
+    "id_product": 12,
+    "name": "Acondicionador de Suelo Orgánico (Materia Orgánica)",
+    "description": "Enmienda orgánica a base de leonardita que mejora la estructura del suelo, la retención de agua y la disponibilidad de nutrientes a largo plazo.",
+    "category": "Enmiendas y Acondicionadores",
+    "price": 30.8,
+    "stock": 1100,
+    "create": "2024-11-15",
+    "image": "https://picsum.photos/id/120/300/300"
+  },
+  {
+    "id_product": 13,
+    "name": "Abono Foliar de Micronutrientes Quelatados",
+    "description": "Mezcla líquida de micronutrientes esenciales (Fe, Zn, Mn, B, Cu) quelatados para rápida absorción foliar, corrigiendo deficiencias en etapas críticas del cultivo.",
+    "category": "Fertilizantes Foliares",
+    "price": 48.3,
+    "stock": 630,
+    "create": "2024-12-01",
+    "image": "https://picsum.photos/id/130/300/300"
+  },
+  {
+    "id_product": 14,
+    "name": "Bomba de Fumigación Manual de 20 Litros",
+    "description": "Equipo de aplicación de agroquímicos. Mochila de fumigación ergonómica con capacidad de 20 litros, lanza de acero inoxidable y boquillas ajustables.",
+    "category": "Equipos y Herramientas",
+    "price": 75.0,
+    "stock": 180,
+    "create": "2025-01-10",
+    "image": "https://picsum.photos/id/140/300/300"
+  },
+  {
+    "id_product": 15,
+    "name": "Plaguicida Biológico (Bacillus thuringiensis)",
+    "description": "Insecticida biológico a base de la bacteria Bacillus thuringiensis, altamente eficaz contra larvas de lepidópteros (orugas) en cultivos orgánicos y convencionales.",
+    "category": "Control Biológico y Trampeo",
+    "price": 60.5,
+    "stock": 350,
+    "create": "2025-02-28",
+    "image": "https://picsum.photos/id/150/300/300"
+  }
+]

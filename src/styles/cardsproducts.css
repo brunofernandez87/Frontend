@@ -1,0 +1,270 @@
+body {
+  background-color: #444444; /* Fondo de la página oscuro */
+  margin: 0;
+  padding: 0;
+  font-family: Arial, sans-serif;
+}
+.App {
+  background-color: #121212;
+  min-height: 100vh;
+}
+
+/* Contenedor del formulario de búsqueda */
+.form-Product {
+  display: flex;
+  gap: 5px;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 10px; /* Separación de los selects de abajo */
+  width: 90%;
+  max-width: 700px;
+  margin-left: auto; /* Centrado */
+  margin-right: auto; /* Centrado */
+  padding-top: 20px; /* Separación del header */
+}
+/* Campo de entrada de búsqueda */
+#search {
+  width: 40%;
+  padding: 10px;
+  border: 1px solid #444444;
+  background-color: #333333;
+  color: #ffffff;
+  border-radius: 5px;
+  font-size: 1em;
+  transition: flex-grow 0.4s ease-in-out;
+}
+#search:focus {
+  flex-grow: 1; /*Para que se expanda y ocupe todo*/
+}
+
+/* Botón de búsqueda */
+#botton-search {
+  padding: 10px;
+  border: none;
+  background-color: #ffd700; /* Amarillo/dorado */
+  color: #222222; /* Texto oscuro */
+  border-radius: 5px;
+  cursor: pointer;
+  font-size: 1em;
+  font-weight: bold;
+  transition: background-color 0.2s ease;
+}
+
+#botton-search:hover {
+  background-color: #e6c200;
+}
+
+/* Estilo para los selects (Categorías y Ordenar) */
+select {
+  padding: 10px;
+  border: 1px solid #444444;
+  background-color: #333333;
+  color: #ffffff;
+  border-radius: 5px;
+  margin-bottom: 20px;
+  margin-left: auto;
+  margin-right: auto;
+  display: block;
+}
+
+/* Contenedor principal de la card */
+.Card-Products {
+  background-color: #f8e87b;
+  color: #000000;
+  border-radius: 20px;
+  padding: 15px 20px;
+  margin: 0 auto 20px auto; /* Centrado y espacio inferior */
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  display: flex;
+  align-items: flex-start;
+  position: relative;
+  max-width: 90%; /* Limita el ancho de la tarjeta */
+}
+
+/* El <a> que envuelve la mayoría de los detalles del producto */
+.link-Products {
+  display: flex;
+  text-decoration: none;
+  color: black;
+  flex-grow: 1;
+  align-items: flex-start;
+}
+
+.link-Products:hover {
+  text-decoration: underline;
+  color: rgb(84, 82, 82);
+}
+
+.Card-Images {
+  width: 100px;
+  height: 100px;
+  min-width: 100px;
+  margin-right: 20px;
+  overflow: hidden;
+  border-radius: 5px;
+  border: 1px solid #a8a8a8;
+}
+
+.Image-product {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.Card-Info-Central {
+  flex-grow: 1;
+  display: flex;
+  flex-direction: column;
+  margin-right: 20px;
+  text-align: left;
+}
+
+.Card-Names {
+  font-weight: bold;
+  margin-bottom: 5px;
+  width: 100%;
+  text-align: left;
+}
+
+.Card-Descriptions {
+  width: 100%;
+  margin-bottom: 5px;
+  line-height: 1.4;
+  text-align: left;
+}
+
+.Card-Categories {
+  font-size: 0.85em;
+  opacity: 0.7;
+  margin-bottom: 0;
+  width: 100%;
+  text-align: center;
+}
+
+.Card-Prices {
+  text-align: right;
+  font-size: 1.1em;
+  padding-top: 5px;
+  border-left: 1px solid #d4d4d4;
+  padding-left: 15px;
+  min-width: 120px;
+  align-self: flex-start;
+}
+
+.Card-Prices b {
+  color: #000000;
+}
+
+.Delete-Button {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  padding: 5px 10px;
+  border: none;
+  border-radius: 20%;
+  cursor: pointer;
+  background-color: #e74c3c;
+  color: white;
+  font-weight: bold;
+  font-size: 1.1em;
+  width: 30px;
+  height: 30px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 10;
+  margin-left: initial;
+  align-self: initial;
+}
+
+.Delete-Button:hover {
+  background-color: #c0392b;
+}
+
+/* Botones de Paginación */
+.Next-Page,
+.Previous-Page {
+  padding: 10px 15px;
+  border: 1px solid #f8e87b;
+  background-color: #2f2e2e;
+  color: #ffffff;
+  border-radius: 5px;
+  cursor: pointer;
+  font-size: 1em;
+  font-weight: normal;
+}
+
+.Next-Page:hover,
+.Previous-Page:hover {
+  background-color: #f8e87b;
+  color: #000000;
+  border: 1px solid #2f2e2e;
+}
+
+.Card-Products + div {
+  display: flex;
+  justify-content: center;
+  gap: 15px;
+  margin-top: 20px;
+}
+
+@media (max-width: 700px) {
+  .Card-Products {
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+  }
+
+  .link-Products {
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    width: 100%;
+    margin-bottom: 10px;
+  }
+
+  .Card-Images {
+    margin-right: 0;
+    margin-bottom: 15px;
+  }
+
+  .Card-Info-Central {
+    margin-right: 0;
+    text-align: center;
+    width: 100%;
+  }
+
+  .Card-Names,
+  .Card-Descriptions,
+  .Card-Categories {
+    text-align: center;
+  }
+
+  .Card-Prices {
+    margin-left: 0;
+    text-align: center;
+    width: 100%;
+    border-left: none;
+    padding-left: 0;
+    margin-top: 10px;
+    align-self: auto;
+  }
+
+  .Delete-Button {
+    position: static;
+    width: 100%;
+    height: auto;
+    padding: 10px 15px;
+    border-radius: 5px;
+    margin-top: 15px;
+    top: auto;
+    right: auto;
+    align-self: center;
+  }
+
+  .Card-Products > button {
+    align-self: center;
+    margin-left: 0;
+    width: 80%;
+  }
+}

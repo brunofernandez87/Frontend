@@ -1,0 +1,191 @@
+/* Contenedor principal */
+.Card-Product-View,
+.Card-Product-Edit {
+  margin: 40px auto;
+  padding: 30px;
+  border-radius: 12px;
+  box-shadow: 0 6px 12px rgba(0, 0, 0, 0.3);
+  max-width: 1000px;
+  align-items: flex-start;
+  font-family: Arial, sans-serif;
+  width: 90%;
+}
+
+/* Imagen del Producto (Común a ambos estados) */
+.Product-Image {
+  width: 250px;
+  height: 250px;
+  min-width: 250px;
+  overflow: hidden;
+  border-radius: 8px;
+  border: 1px solid #c2c2c2;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+}
+.Product-Image img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+/* Botones*/
+.Card-Product-View .Product-Actions button,
+.Card-modified-Content form button[type="submit"] {
+  background-color: #ffd700;
+  color: #222222;
+  border: none;
+  padding: 10px 18px;
+  border-radius: 4px;
+  font-weight: bold;
+  cursor: pointer;
+  transition: background-color 0.2s ease;
+}
+.Card-Product-View .Product-Actions button:hover,
+.Card-modified-Content form button[type="submit"]:hover {
+  background-color: #e6c200;
+}
+
+.Card-Product-View {
+  background-color: #f8e87b;
+  color: #000000;
+  display: flex; /* Imagen y Contenedor de Info en fila */
+  gap: 30px;
+}
+
+.Card-Product-View .Product-Info-Container {
+  flex-grow: 1;
+}
+
+/* Título */
+.Card-Product-View .Card-Name p b {
+  font-size: 2.2em;
+  font-weight: 700;
+  margin-bottom: 10px;
+  color: #222222;
+  display: block;
+}
+
+/* Descripción */
+.Card-Product-View .Product-Description p {
+  font-size: 1.1em;
+  line-height: 1.6;
+  padding-bottom: 15px;
+  border-bottom: 1px solid #c2c2c2;
+  margin-bottom: 15px;
+}
+
+/* Detalles (Categoría, Precio, Stock) */
+.Card-Product-View .Product-Details {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 10px 20px;
+  font-size: 1em;
+  font-weight: bold;
+  margin-bottom: 20px;
+}
+
+/* Contenedor de Acciones */
+.Card-Product-View .Product-Actions {
+  display: flex;
+  gap: 15px;
+  margin-top: 20px;
+  flex-wrap: wrap;
+  padding-top: 15px;
+  border-top: 1px solid #c2c2c2;
+}
+
+.Card-Product-Edit {
+  background-color: #f8e87b;
+  color: #222222;
+
+  /* Configuración de Grid para la disposición Imagen | Campos */
+  display: grid;
+  grid-template-columns: 250px 1fr;
+  gap: 20px 40px;
+}
+
+/* Contenido del Formulario */
+.Card-modified-Content {
+  grid-column: 1 / 3; /* Ocupa ambas columnas para contener el form */
+  display: contents;
+}
+
+.Card-modified-Content form {
+  display: contents; /* Permite que los hijos del form usen el grid del padre */
+}
+
+/* Imagen en el formulario (Columna 1) */
+.Card-Product-Edit .Product-Image {
+  grid-column: 1 / 2;
+  grid-row: 1 / span 10;
+  margin: 0;
+  opacity: 0.8;
+}
+
+/* Estilo de los inputs (Columna 2) */
+.Card-Product-Edit form > div {
+  grid-column: 2 / 3; /* Fuerza todos los divs (campos) a la columna derecha */
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+}
+
+/* Título de Producto (Input) */
+.Card-Product-Edit .Card-Name input {
+  font-size: 1.8em;
+  font-weight: bold;
+  padding: 8px;
+}
+
+/* Inputs y Textarea */
+.Card-Product-Edit form input[type="text"],
+.Card-Product-Edit form input[type="number"],
+.Card-Product-Edit form textarea {
+  resize: vertical;
+  width: 100%;
+  padding: 12px;
+  border: 1px solid #ffdd00; /* Borde amarillo para indicar edición */
+  border-radius: 6px;
+  background-color: #ffffff;
+  color: #000000;
+  font-size: 1.1em;
+  box-sizing: border-box;
+}
+
+/* Botón "Guardar" */
+.Card-modified-Content form button[type="submit"] {
+  padding: 15px 30px;
+  font-size: 1.3em;
+  grid-column: 2 / 3;
+  justify-self: start;
+  width: auto;
+}
+
+@media (max-width: 768px) {
+  /* MODO LECTURA: Columna */
+  .Card-Product-View {
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+  }
+  .Card-Product-View .Product-Details {
+    grid-template-columns: 1fr;
+  }
+
+  /* MODO EDICIÓN: Columna */
+  .Card-Product-Edit {
+    grid-template-columns: 1fr;
+    gap: 20px;
+  }
+  .Card-Product-Edit .Product-Image {
+    grid-column: 1 / 2;
+    margin: 0 auto 20px;
+    width: 80%;
+  }
+  /* Asegura que todos los elementos se apilen en la columna única en móvil */
+  .Card-modified-Content form > div,
+  .Card-modified-Content form button[type="submit"] {
+    grid-column: 1 / 2;
+    width: 100%;
+    margin: 0;
+  }
+}
