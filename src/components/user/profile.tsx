@@ -76,7 +76,7 @@ export default function Profile() {
       <button onClick={logout}>
         <MdLogout /> Cerrar sesion
       </button>
-      <button onClick={deleteUser} 
+      <button onClick={deleteUser}>
         <FaRegTrashCan /> Eliminar Cuenta
       </button>
     </div>
