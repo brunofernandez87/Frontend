@@ -9,10 +9,10 @@ Frontend del e-commerce de insumos agrícolas **AgroInsumos**, construido con **
 - **React** + **TypeScript**
 - **Vite**
 - **React Router**
-- **Axios** (si aplica)
+- **Axios** (*si aplica*)
 - **CSS / SASS**
-- **ESLint** (configuración presente)
-- **Docker + Nginx** (para despliegue)
+- **ESLint** (*configuración presente*)
+- **Docker + Nginx** (*para despliegue*)
 
 ---
 
@@ -46,55 +46,62 @@ Eccomerce-Frontend/
 ---
 
 ## 🚀 Instalación y Ejecución
-```bash
-1️⃣ Clonar el repositorio
+```ruby
+1️⃣ #Clonar el repositorio
 git clone https://github.com/brunofernandez87/Eccomerce-Frontend.git
 cd Eccomerce-Frontend
 
-2️⃣ Instalar dependencias
+2️⃣ #Instalar dependencias
 npm install
 
-3️⃣ Ejecutar el entorno de desarrollo
+3️⃣ #Ejecutar el entorno de desarrollo
 npm run dev
 
-4️⃣ Generar build de producción
+4️⃣ #Generar build de producción
 npm run build
 
-5️⃣ Previsualizar la build (opcional)
+5️⃣ #Previsualizar la build (opcional)
 npm run preview
 ```
 
-🧪 Funcionalidades
-✔️ Listado de productos
+## 🧪 Funcionalidades
 
-✔️ Vista detallada de productos
+- ✔️ Listado de productos
 
-✔️ Carrito de compras
+- ✔️ Vista detallada de productos
 
-✔️ Filtros por categoría / tipo
+- ✔️ Carrito de compras
 
-✔️ Diseño 100% responsive
+- ✔️ Filtros por categoría / tipo
 
-⏳ Comunicación con API externa (en proceso)
+- ✔️ Diseño 100% responsive
 
-✔️ Checkout
 
-✔️ Login / registro
+### ⏳ Comunicación con API externa (en proceso)
+
+- ✔️ Checkout
+- ✔️ Login / registro
 
 ### 📦 Scripts del Proyecto
 
-nginx
-```bash
-npm run dev       # Inicia el servidor de desarrollo
-npm run build     # Compila para producción
-npm run preview   # Previsualiza la build
+**NGINX**
+```ruby
+# Inicia el servidor de desarrollo
+npm run dev
+
+# Compila para producción
+npm run build
+
+# Previsualiza la build
+npm run preview
 ```
+
 ## 🐳 Despliegue con Docker
 ```bash
-Construir imagen
+#Construir imagen
 docker build -t agroinsumos-frontend .
 
-Ejecutar contenedor
+#Ejecutar contenedor
 docker run -d -p 80:80 agroinsumos-frontend
 
 Esto servirá la aplicación con Nginx en el puerto 80.
@@ -103,7 +110,7 @@ Esto servirá la aplicación con Nginx en el puerto 80.
 🤝 Contribuciones
 Las contribuciones son bienvenidas.
 
-```bash
+```ruby
 Crear un fork del repositorio.
 Crear una rama nueva:
 git checkout -b feature/nueva-funcionalidad
