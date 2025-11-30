@@ -1,35 +1,46 @@
-import { useState } from 'react'
-import reactLogo from './assets/react.svg'
-import viteLogo from '/vite.svg'
-import './App.css'
-
+import "./App.css";
+import Header from "./components/header/header";
+import Footer from "./components/footer/footer";
+import Routs from "./routes";
+import { UserProvider } from "./context/userContext";
+import { CartProvider } from "./context/cartContext";
+import { ProductListProvider } from "./context/productListContext";
+import { UserListProvider } from "./context/userListContext";
+import OrderListProvider from "./context/orderListContext";
+import OrderDetailListProvider from "./context/orderDetailListContext";
+import { ProductFilterProvider } from "./context/productFilterContext";
+import { UserListFilterProvider } from "./context/userListFilterContext";
+import { ReportListProvider } from "./context/reportListContext";
+import { ReportListFilterProvider } from "./context/reportListFilterContext";
+import { OrderListFilterProvider } from "./context/orderListFilterContext";
 function App() {
-  const [count, setCount] = useState(0)
-
   return (
-    <>
-      <div>
-        <a href="https://vite.dev" target="_blank">
-          <img src={viteLogo} className="logo" alt="Vite logo" />
-        </a>
-        <a href="https://react.dev" target="_blank">
-          <img src={reactLogo} className="logo react" alt="React logo" />
-        </a>
-      </div>
-      <h1>Vite + React</h1>
-      <div className="card">
-        <button onClick={() => setCount((count) => count + 1)}>
-          count is {count}
-        </button>
-        <p>
-          Edit <code>src/App.tsx</code> and save to test HMR
-        </p>
-      </div>
-      <p className="read-the-docs">
-        Click on the Vite and React logos to learn more
-      </p>
-    </>
-  )
+    <UserProvider>
+      <ProductListProvider>
+        <ProductFilterProvider>
+          <UserListProvider>
+            <UserListFilterProvider>
+              <ReportListProvider>
+                <ReportListFilterProvider>
+                  <OrderListProvider>
+                    <OrderListFilterProvider>
+                      <Header />
+                      <CartProvider>
+                        <OrderDetailListProvider>
+                          <Routs />
+                        </OrderDetailListProvider>
+                      </CartProvider>
+                    </OrderListFilterProvider>
+                  </OrderListProvider>
+                </ReportListFilterProvider>
+              </ReportListProvider>
+            </UserListFilterProvider>
+          </UserListProvider>
+        </ProductFilterProvider>
+      </ProductListProvider>
+      <Footer />
+    </UserProvider>
+  );
 }
 
-export default App
+export default App;
