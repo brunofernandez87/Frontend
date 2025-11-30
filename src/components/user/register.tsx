@@ -1,14 +1,17 @@
 import { useState } from "react";
 import { useUserList } from "../../context/userListContext";
-import "../../styles/register.css";
+import "../../styles/user/register.css";
+import { useNavigate } from "react-router-dom";
 export default function Register() {
   const { userList, setuserList } = useUserList();
   const [email, setemail] = useState("");
+  const navigate = useNavigate();
   const handleSubmit = (event) => {
-    const formData = new FormData();
+    event.preventDefault();
+    const formData = new FormData(event.target);
     const user = userList.find((u) => u.email === email);
+    const image = URL.createObjectURL(formData.get("image"));
     if (user) {
-      event.preventDefault();
       alert("El email ya esta en uso");
     } else {
       const date = new Date();
@@ -19,16 +22,20 @@ export default function Register() {
         rol: "cliente",
         create: date,
         name: formData.get("name"),
+        image: image,
         username: formData.get("username"),
       };
-      setuserList([...userList]);
+      setuserList([...userList, newUser]);
       alert("Usuario Registrado");
+      navigate("/login");
     }
   };
   return (
     <div className="Container-Register">
       <form onSubmit={handleSubmit}>
         <h2>Crear cuenta</h2>
+        <label>Imagen:</label>
+        <input type="file" name="image" />
         <label htmlFor="name">Nombre</label>
         <input
           type="text"
