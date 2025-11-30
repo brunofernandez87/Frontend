@@ -1,11 +1,10 @@
 import { useState } from "react";
-import { Navigate, useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import { useProductList } from "../../context/productListContext";
 import { useUser } from "../../context/userContext";
-import "../../styles/createProduct.css";
+import "../../styles/product/createProduct.css";
 
 export default function CreateProduct() {
-  const { user } = useUser();
   const { productList, setproductList } = useProductList();
   const navigate = useNavigate();
   const [name, setname] = useState("");

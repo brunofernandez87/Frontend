@@ -1,22 +1,23 @@
 import { Link } from "react-router-dom";
 import { useEffect, useMemo, useState } from "react";
-import "../../styles/cardsproducts.css";
+import "../../styles/product/cardsproducts.css";
 import FilterCategory from "../filterCategory";
 import SelectProduct from "./selectProduct";
-import SearchProduct from "./searchProduct";
+import SearchCategory from "./searchCategory";
 import { useUser } from "../../context/userContext";
 import { useProductList } from "../../context/productListContext";
+import { useProductFilter } from "../../context/productFilterContext";
 export default function CardProducts() {
   const { productList, setproductList } = useProductList();
   const [page, setpage] = useState(1);
   const productFilt = useMemo(() => {
     return productList.filter((p) => p.stock > 0);
   }, [productList]);
+  const { productfilter, setproductfilter } = useProductFilter();
   useEffect(() => {
     setproductfilter(productList);
-  }, [productList]);
+  }, [productList, setproductfilter]);
   const { user } = useUser();
-  const [productfilter, setproductfilter] = useState(productFilt);
   const maxProduct = 5;
   const limite = page * maxProduct;
   const limiteant = limite - maxProduct;
@@ -45,11 +46,18 @@ export default function CardProducts() {
 
   return (
     <>
-      <SearchProduct
+      <SearchCategory
         productFilt={productFilt}
         setproductfilter={setproductfilter}
+        category="name"
+        label="Buscar Producto"
       />
-      <FilterCategory products={productFilt} categoryFilter={categoryFilter} />
+      <FilterCategory
+        products={productFilt}
+        category="category"
+        filter={categoryFilter}
+        label={"ordenar por"}
+      />
       <SelectProduct
         productfilter={productfilter}
         setpage={setpage}
@@ -84,8 +92,8 @@ export default function CardProducts() {
                 /* al ser admin podes eliminar */ <button
                   className="Delete-Button"
                   onClick={() => {
-                    setproductList(
-                      productfilter.filter(
+                    setproductList((prevlist) =>
+                      prevlist.filter(
                         (p) => p.id_product !== product.id_product
                       )
                     );

@@ -2,7 +2,7 @@ import { Link, Navigate, useParams } from "react-router-dom";
 import { useState } from "react";
 import { useUser } from "../../context/userContext";
 import { useProductList } from "../../context/productListContext";
-import "../../styles/cardProduct.css";
+import "../../styles/product/cardProduct.css";
 export default function CardProduct(props) {
   const { productList, setproductList } = useProductList();
   const { user } = useUser();
