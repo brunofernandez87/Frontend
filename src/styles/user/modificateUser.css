@@ -1,0 +1,93 @@
+.user-modification-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 90vh; /* Ocupa gran parte de la vista */
+    padding: 30px 20px;
+    color: #ffffff;
+    font-family: Arial, sans-serif;
+}
+
+/* Estilo del formulario*/
+.user-modification-form {
+    background-color: #222222;
+    padding: 30px;
+    border-radius: 8px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.6);
+    width: 100%;
+    max-width: 450px; 
+    display: flex;
+    flex-direction: column;
+    gap: 15px; /* Espacio entre los grupos de label/input */
+    align-items: center; /* Centra la imagen y el botón */
+}
+
+
+.user-modification-form img {
+    width: 120px;
+    height: 120px;
+    object-fit: cover;
+    border-radius: 50%; /* Forma circular para imagen de perfil */
+    border: 3px solid #FFD700; 
+    margin: 10px 0 20px 0; /* Espaciado vertical */
+    box-shadow: 0 0 10px rgba(255, 215, 0, 0.4);
+}
+
+/* Estilo para las etiquetas */
+.user-modification-form label {
+    font-weight: bold;
+    color: #ffffff; 
+    margin-top: 5px;
+    margin-bottom: 5px;
+    display: block;
+    width: 100%;
+    text-align: left;
+}
+
+/* Estilo para todos los inputs de texto y email */
+.user-modification-form input[type="email"],
+.user-modification-form input[type="text"],
+.user-modification-form input[type="file"] {
+    width: 100%;
+    padding: 12px;
+    border: 1px solid #444444;
+    border-radius: 4px;
+    background-color: #333333;
+    color: #ffffff;
+    font-size: 1em;
+    box-sizing: border-box;
+    transition: border-color 0.3s ease, box-shadow 0.3s ease;
+}
+
+/* Estilo para la Nueva Imagen) */
+.user-modification-form input[type="file"] {
+    padding-top: 8px; 
+    padding-bottom: 8px;
+}
+
+.user-modification-form input:focus {
+    border-color: #FFD700;
+    outline: none;
+    box-shadow: 0 0 5px rgba(255, 215, 0, 0.5);
+}
+
+/* Botón de envío */
+.user-modification-form button[type="submit"] {
+    background-color: #ffd700;
+    color: #222222;
+    border: none;
+    padding: 12px 20px;
+    border-radius: 4px;
+    font-size: 1.1em;
+    font-weight: bold;
+    cursor: pointer;
+    text-transform: uppercase;
+    margin-top: 15px; 
+    width: 100%; /* Para que el botón sea ancho */
+    transition: background-color 0.3s ease, transform 0.1s ease;
+}
+
+.user-modification-form button[type="submit"]:hover {
+    background-color: #e6c200;
+    transform: translateY(-1px);
+}
