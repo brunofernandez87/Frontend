@@ -2,7 +2,7 @@ import { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { LuEye } from "react-icons/lu";
 import { LuEyeClosed } from "react-icons/lu";
-import "../../styles/login.css";
+import "../../styles/user/login.css";
 
 export default function Login() {
   const [user, setuser] = useState("");
