@@ -5,9 +5,10 @@ import { useUserList } from "../../context/userListContext";
 import { LuEye } from "react-icons/lu";
 import { LuEyeClosed } from "react-icons/lu";
 import { MdLogout } from "react-icons/md";
-import "../../styles/profile.css";
+import { FaRegTrashCan } from "react-icons/fa6";
+import "../../styles/user/profile.css";
 export default function Profile() {
-  const { userList } = useUserList();
+  const { userList, setuserList } = useUserList();
   const [showpassword, setshowpassword] = useState(false);
   const navigate = useNavigate();
   const { setuser } = useUser();
@@ -31,6 +32,17 @@ export default function Profile() {
   function logout() {
     setuser(null);
     navigate("/", { replace: true });
+  }
+  function deleteUser() {
+    if (!window.confirm("Estas seguro de eliminar tu cuenta?")) {
+      return;
+    }
+    const listFilt = userList.filter((u) => u.id_user != user.id_user);
+    navigate("/", { replace: true });
+    setTimeout(() => {
+      setuserList(listFilt);
+      setuser(null);
+    }, 1);
   }
   return (
     <div className="Div-Profile">
@@ -58,8 +70,14 @@ export default function Profile() {
           <button>Cambiar Contraseña</button>
         </Link>
       </div>
+      <Link to={`/modificateUser`}>
+        <button> Modificar</button>
+      </Link>
       <button onClick={logout}>
         <MdLogout /> Cerrar sesion
+      </button>
+      <button onClick={deleteUser} 
+        <FaRegTrashCan /> Eliminar Cuenta
       </button>
     </div>
   );
