@@ -1,0 +1,152 @@
+[
+  {
+    "id_report": 1,
+    "date_generated": "09/12/2024",
+    "generated_by_user": "admin"
+  },
+  {
+    "id_report": 2,
+    "date_generated": "28/09/2025",
+    "generated_by_user": "vendedor"
+  },
+  {
+    "id_report": 3,
+    "date_generated": "23/08/2025",
+    "generated_by_user": "admin"
+  },
+  {
+    "id_report": 4,
+    "date_generated": "13/01/2025",
+    "generated_by_user": "vendedor"
+  },
+  {
+    "id_report": 5,
+    "date_generated": "04/09/2025",
+    "generated_by_user": "admin"
+  },
+  {
+    "id_report": 6,
+    "date_generated": "18/02/2025",
+    "generated_by_user": "vendedor"
+  },
+  {
+    "id_report": 7,
+    "date_generated": "27/06/2025",
+    "generated_by_user": "admin"
+  },
+  {
+    "id_report": 8,
+    "date_generated": "16/06/2025",
+    "generated_by_user": "vendedor"
+  },
+  {
+    "id_report": 9,
+    "date_generated": "27/04/2025",
+    "generated_by_user": "admin"
+  },
+  {
+    "id_report": 10,
+    "date_generated": "23/02/2025",
+    "generated_by_user": "vendedor"
+  },
+  {
+    "id_report": 11,
+    "date_generated": "05/05/2025",
+    "generated_by_user": "admin"
+  },
+  {
+    "id_report": 12,
+    "date_generated": "01/10/2025",
+    "generated_by_user": "vendedor"
+  },
+  {
+    "id_report": 13,
+    "date_generated": "20/11/2025",
+    "generated_by_user": "admin"
+  },
+  {
+    "id_report": 14,
+    "date_generated": "01/03/2025",
+    "generated_by_user": "vendedor"
+  },
+  {
+    "id_report": 15,
+    "date_generated": "17/07/2025",
+    "generated_by_user": "admin"
+  },
+  {
+    "id_report": 16,
+    "date_generated": "10/04/2025",
+    "generated_by_user": "vendedor"
+  },
+  {
+    "id_report": 17,
+    "date_generated": "05/08/2025",
+    "generated_by_user": "admin"
+  },
+  {
+    "id_report": 18,
+    "date_generated": "22/01/2025",
+    "generated_by_user": "vendedor"
+  },
+  {
+    "id_report": 19,
+    "date_generated": "30/10/2025",
+    "generated_by_user": "admin"
+  },
+  {
+    "id_report": 20,
+    "date_generated": "15/03/2025",
+    "generated_by_user": "vendedor"
+  },
+  {
+    "id_report": 21,
+    "date_generated": "03/06/2025",
+    "generated_by_user": "admin"
+  },
+  {
+    "id_report": 22,
+    "date_generated": "19/09/2025",
+    "generated_by_user": "vendedor"
+  },
+  {
+    "id_report": 23,
+    "date_generated": "05/12/2025",
+    "generated_by_user": "admin"
+  },
+  {
+    "id_report": 24,
+    "date_generated": "09/07/2025",
+    "generated_by_user": "vendedor"
+  },
+  {
+    "id_report": 25,
+    "date_generated": "02/02/2025",
+    "generated_by_user": "admin"
+  },
+  {
+    "id_report": 26,
+    "date_generated": "15/08/2025",
+    "generated_by_user": "vendedor"
+  },
+  {
+    "id_report": 27,
+    "date_generated": "07/11/2025",
+    "generated_by_user": "admin"
+  },
+  {
+    "id_report": 28,
+    "date_generated": "20/04/2025",
+    "generated_by_user": "vendedor"
+  },
+  {
+    "id_report": 29,
+    "date_generated": "25/05/2025",
+    "generated_by_user": "admin"
+  },
+  {
+    "id_report": 30,
+    "date_generated": "18/10/2025",
+    "generated_by_user": "vendedor"
+  }
+]
