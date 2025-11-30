@@ -1,13 +1,14 @@
-export default function FilterCategory({ products, categoryFilter }) {
+export default function FilterCategory({ products, category, filter, label }) {
   let totally = [];
   products.forEach((p) => {
-    if (!totally.includes(p.category)) {
-      totally.push(p.category);
+    const value = p[category];
+    if (!totally.includes(value)) {
+      totally.push(value);
     }
   });
   return (
-    <select onChange={categoryFilter}>
-      <option value="">Todas las categorías</option>
+    <select onChange={filter}>
+      <option value="">{label || "Seleccionar"}</option>
       {totally.map((c) => (
         <option key={c} value={c}>
           {c}
