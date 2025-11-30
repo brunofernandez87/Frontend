@@ -1,0 +1,164 @@
+.orders-page-container {
+  color: #ffffff;
+  min-height: 85vh;
+  padding: 40px 20px;
+  font-family: Arial, sans-serif;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 25px;
+}
+
+/*Filtro de Búsqueda */
+.orders-page-container > div:nth-child(1) {
+  width: 100%;
+  max-width: 900px;
+  margin-bottom: 20px;
+}
+
+/* Contenedor de todas las tarjetas */
+.order-card-wrapper {
+  width: 100%;
+  max-width: 900px;
+  display: flex;
+  flex-direction: column;
+  gap: 15px; /* Espacio entre cada tarjeta */
+}
+
+.order-card {
+  background-color: #2a2a2a;
+  border-radius: 10px;
+  padding: 0;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.6);
+
+  display: flex;
+  justify-content: space-between;
+  align-items: center; /* Centra verticalmente */
+  width: 100%;
+  border-left: 5px solid #ffd700; 
+}
+
+.order-details-link {
+  display: flex;
+  flex-grow: 1; /* Ocupa el espacio disponible */
+  gap: 20px; /* Espacio entre los bloques principales */
+  text-decoration: none;
+  color: #ffffff;
+  align-items: center;
+  padding: 15px 20px;
+  flex-wrap: wrap;
+}
+
+/* Estilos de los valores (Fecha, Estado, Usuario, Total) */
+.order-details-link span {
+  font-size: 0.95em;
+  white-space: nowrap; /* Mantiene la información en una sola línea */
+  padding: 5px 0;
+}
+
+/* Agrupación Estado y Usuario */
+.order-status-group {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  flex-grow: 1;
+  min-width: 120px;
+}
+
+.order-details-link .order-date {
+  font-weight: 500;
+  color: #cccccc;
+  flex-shrink: 0;
+}
+
+.order-details-link .order-state {
+  color: #ffe100;
+  font-weight: bold;
+  font-size: 1em;
+}
+
+.order-details-link .order-total-value {
+  font-weight: bold;
+  font-size: 1.2em;
+  color: #ffd700;
+  text-align: right;
+  padding-left: 20px;
+  border-left: 1px solid #444444;
+}
+
+.cancel-order-button {
+  background-color: #e74c3c;
+  color: white;
+  border: none;
+  padding: 8px 15px;
+  border-radius: 4px;
+  font-size: 0.9em;
+  cursor: pointer;
+  transition: background-color 0.2s ease;
+  flex-shrink: 0;
+  margin-right: 20px;
+}
+.cancel-order-button:hover {
+  background-color: #c0392b;
+}
+
+/* Contenedor de Paginación */
+.pagination-container {
+  display: flex;
+  justify-content: center;
+  gap: 20px;
+  margin-top: 20px;
+  width: 100%;
+  max-width: 900px;
+}
+
+.Next-Page,
+.Previous-Page {
+  background-color: transparent;
+  color: #ffd700;
+  border: 1px solid #ffd700;
+  padding: 10px 20px;
+  border-radius: 6px;
+  cursor: pointer;
+  transition: background-color 0.2s ease, color 0.2s ease;
+}
+.Next-Page:hover,
+.Previous-Page:hover {
+  background-color: #ffd700;
+  color: #222222;
+}
+
+@media (max-width: 650px) {
+  .order-card {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  .order-details-link {
+    flex-direction: column;
+    align-items: flex-start;
+    padding-right: 0;
+    gap: 10px;
+    width: 100%;
+    padding-bottom: 15px;
+  }
+
+  .order-details-link span {
+    white-space: normal;
+    font-size: 1em;
+    width: 100%;
+  }
+
+  .order-details-link .order-total-value {
+    order: -1;
+    border-left: none;
+    padding-left: 0;
+    font-size: 1.4em;
+    margin-bottom: 10px;
+  }
+
+  .cancel-order-button {
+    width: 100%;
+    margin: 0 0 5px 0;
+  }
+}
