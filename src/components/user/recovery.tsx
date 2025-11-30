@@ -1,7 +1,7 @@
 import userMock from "../../mock/userMock.json";
 import { useState } from "react";
 import { TbMailForward, TbMailX } from "react-icons/tb";
-import "../../styles/recovery.css";
+import "../../styles/user/recovery.css";
 export default function Recovery() {
   const [email, setemail] = useState("");
   const handlesubmit = (event) => {
