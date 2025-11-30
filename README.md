@@ -1,73 +1,149 @@
-# React + TypeScript + Vite
+# 🌱 AgroInsumos E-Commerce (Frontend)
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+Frontend del e-commerce de insumos agrícolas **AgroInsumos**, construido con **React + TypeScript + Vite**. El proyecto ofrece una experiencia rápida, moderna y optimizada para que los usuarios puedan explorar, filtrar y comprar productos agropecuarios mediante una interfaz clara y responsiva.
 
-Currently, two official plugins are available:
+---
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) (or [oxc](https://oxc.rs) when used in [rolldown-vite](https://vite.dev/guide/rolldown)) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+## 📚 Tecnologías Utilizadas
 
-## React Compiler
+- **React** + **TypeScript**
+- **Vite**
+- **React Router**
+- **Axios** (si aplica)
+- **CSS / SASS**
+- **ESLint** (configuración presente)
+- **Docker + Nginx** (para despliegue)
 
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
+---
 
-## Expanding the ESLint configuration
+## 📁 Estructura del Proyecto
 
-If you are developing a production application, we recommend updating the configuration to enable type-aware lint rules:
+Basado en la estructura real del repositorio (`branch dev`):
+```plaintext
+Eccomerce-Frontend/
+├── public/
+│ └── index.html
+├── src/
+│ ├── assets/ # imágenes, SVGs y archivos estáticos
+│ ├── components/ # componentes reutilizables
+│ ├── pages/ # páginas principales del sitio
+│ ├── routes/ # configuración de rutas
+│ ├── services/ # comunicación con API (fetch/axios)
+│ ├── store/ # estado global (Context, Zustand, Redux, etc.)
+│ ├── styles/ # estilos globales / parciales
+│ └── utils/ # helpers y utilidades
+├── .gitignore
+├── .dockerignore
+├── Dockerfile # preparación para despliegue con Nginx
+├── nginx.conf # configuración de Nginx
+├── eslint.config.js
+├── tsconfig.json
+├── tsconfig.app.json
+├── tsconfig.node.json
+├── vite.config.ts
+└── package.json
+```
+---
 
-```js
-export default defineConfig([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
+## 🚀 Instalación y Ejecución
+```bash
+1️⃣ Clonar el repositorio
+git clone https://github.com/brunofernandez87/Eccomerce-Frontend.git
+cd Eccomerce-Frontend
 
-      // Remove tseslint.configs.recommended and replace with this
-      tseslint.configs.recommendedTypeChecked,
-      // Alternatively, use this for stricter rules
-      tseslint.configs.strictTypeChecked,
-      // Optionally, add this for stylistic rules
-      tseslint.configs.stylisticTypeChecked,
+2️⃣ Instalar dependencias
+npm install
 
-      // Other configs...
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
+3️⃣ Ejecutar el entorno de desarrollo
+npm run dev
+
+4️⃣ Generar build de producción
+npm run build
+
+5️⃣ Previsualizar la build (opcional)
+npm run preview
 ```
 
-You can also install [eslint-plugin-react-x](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-x) and [eslint-plugin-react-dom](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-dom) for React-specific lint rules:
+🧪 Funcionalidades
+✔️ Listado de productos
 
-```js
-// eslint.config.js
-import reactX from 'eslint-plugin-react-x'
-import reactDom from 'eslint-plugin-react-dom'
+✔️ Vista detallada de productos
 
-export default defineConfig([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
-      // Enable lint rules for React
-      reactX.configs['recommended-typescript'],
-      // Enable lint rules for React DOM
-      reactDom.configs.recommended,
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
+✔️ Carrito de compras
+
+✔️ Filtros por categoría / tipo
+
+✔️ Diseño 100% responsive
+
+⏳ Comunicación con API externa (en proceso)
+
+✔️ Checkout
+
+✔️ Login / registro
+
+### 📦 Scripts del Proyecto
+
+nginx
+```bash
+npm run dev       # Inicia el servidor de desarrollo
+npm run build     # Compila para producción
+npm run preview   # Previsualiza la build
 ```
+## 🐳 Despliegue con Docker
+```bash
+Construir imagen
+docker build -t agroinsumos-frontend .
+
+Ejecutar contenedor
+docker run -d -p 80:80 agroinsumos-frontend
+
+Esto servirá la aplicación con Nginx en el puerto 80.
+```
+
+🤝 Contribuciones
+Las contribuciones son bienvenidas.
+
+```bash
+Crear un fork del repositorio.
+Crear una rama nueva:
+git checkout -b feature/nueva-funcionalidad
+
+Realizar los cambios y commitear:
+git commit -m "feat: nueva funcionalidad"
+
+Hacer push:
+git push origin feature/nueva-funcionalidad
+Abrir un Pull Request.
+```
+
+### 📈 Roadmap de Mejoras
+
+- Integración completa de checkout y pasarela de pagos
+
+- Optimización de imágenes
+
+- Sistema de favoritos
+
+- Integración CI/CD (GitHub Actions)
+
+- Mejoras de accesibilidad
+
+---
+
+### 📄 Licencia
+
+Este proyecto se distribuye bajo la licencia MIT.
+Asegurate de incluir un archivo LICENSE en la raíz si aún no está presente.
+
+---
+
+### 👤 Colaboradores
+
+Bruno Fernández - Ivo Depari - Eros Perrone - Franco Devaux
+
+Repositorio: https://github.com/brunofernandez87/Eccomerce-Frontend
+
+---
+
+### 📝 Última Actualización
+2025-11-23
