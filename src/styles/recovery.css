@@ -1,0 +1,36 @@
+.Container-recovery {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 10px;
+  color: #ffffff;
+  font-family: Arial, sans-serif;
+}
+.form-recovery {
+  background-color: #222222;
+  padding: 30px;
+  border-radius: 8px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.5);
+  width: 100%;
+  max-width: 400px;
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+}
+.button-recovery {
+  background-color: #ffd700;
+  color: #222222;
+  border: none;
+  padding: 12px 20px;
+  border-radius: 4px;
+  font-size: 1.1em;
+  font-weight: bold;
+  cursor: pointer;
+  text-transform: uppercase;
+  margin-top: 10px;
+  transition: background-color 0.3s ease, transform 0.1s ease;
+}
+.button-recovery:hover {
+  background-color: #e6c200;
+  transform: translateY(-1px);
+}

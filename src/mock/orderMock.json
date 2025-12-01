@@ -1,0 +1,107 @@
+[
+  {
+    "id_order": 1,
+    "id_user": "cgilbanks2",
+    "date": "26/04/2025",
+    "state": "entregado",
+    "total": 449.91
+  },
+  {
+    "id_order": 2,
+    "id_user": "jwinchcum1",
+    "date": "31/01/2025",
+    "state": "en camino",
+    "total": 50.0
+  },
+  {
+    "id_order": 3,
+    "id_user": "gvanhaeften0",
+    "date": "28/08/2025",
+    "state": "en preparacion",
+    "total": 159.96
+  },
+  {
+    "id_order": 4,
+    "id_user": "gvanhaeften0",
+    "date": "22/01/2025",
+    "state": "entregado",
+    "total": 87.92
+  },
+  {
+    "id_order": 5,
+    "id_user": "rwhitaker4",
+    "date": "24/09/2025",
+    "state": "en camino",
+    "total": 14.97
+  },
+  {
+    "id_order": 6,
+    "id_user": "tpuckring5",
+    "date": "27/06/2025",
+    "state": "en preparacion",
+    "total": 79.96
+  },
+  {
+    "id_order": 7,
+    "id_user": "cgilbanks2",
+    "date": "18/02/2025",
+    "state": "entregado",
+    "total": 19.74
+  },
+  {
+    "id_order": 8,
+    "id_user": "aleopold9",
+    "date": "02/07/2025",
+    "state": "en camino",
+    "total": 580.86
+  },
+  {
+    "id_order": 9,
+    "id_user": "gmckern6",
+    "date": "10/11/2024",
+    "state": "en preparacion",
+    "total": 349.93
+  },
+  {
+    "id_order": 10,
+    "id_user": "rwhitaker4",
+    "date": "08/11/2024",
+    "state": "entregado",
+    "total": 51.0
+  },
+  {
+    "id_order": 11,
+    "id_user": "krenoden3",
+    "date": "05/03/2025",
+    "state": "entregado",
+    "total": 99.99
+  },
+  {
+    "id_order": 12,
+    "id_user": "wgorhardt7",
+    "date": "12/10/2025",
+    "state": "en camino",
+    "total": 119.97
+  },
+  {
+    "id_order": 13,
+    "id_user": "afounds8",
+    "date": "20/07/2025",
+    "state": "en preparacion",
+    "total": 39.92
+  },
+  {
+    "id_order": 14,
+    "id_user": "gvanhaeften0",
+    "date": "01/12/2025",
+    "state": "en camino",
+    "total": 100.0
+  },
+  {
+    "id_order": 15,
+    "id_user": "cgilbanks2",
+    "date": "01/01/2026",
+    "state": "entregado",
+    "total": 39.98
+  }
+]

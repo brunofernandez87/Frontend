@@ -1,0 +1,144 @@
+.report-page-container {
+  color: #ffffff;
+  min-height: 90vh;
+  padding: 40px 20px;
+  font-family: Arial, sans-serif;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 25px;
+}
+
+/* Contenedor que agrupa los botones de acción */
+.report-actions-wrapper {
+  display: flex;
+  justify-content: center;
+  gap: 20px;
+  margin-bottom: 10px; /* Espacio debajo de los botones */
+  width: 100%;
+  max-width: 900px; /* Limita el ancho al contenedor de la lista */
+}
+
+.report-actions-wrapper button {
+  background-color: #ffd700;
+  color: #222222;
+  border: none;
+  padding: 12px 25px;
+  border-radius: 6px;
+  font-size: 1em;
+  font-weight: bold;
+  cursor: pointer;
+  text-transform: uppercase;
+  transition: background-color 0.2s ease, transform 0.1s ease;
+  flex-grow: 1;
+  max-width: 250px;
+}
+
+.report-actions-wrapper button:hover {
+  background-color: #e6c200;
+  transform: translateY(-1px);
+}
+
+/* Contenedor de la lista de reportes */
+.report-list-container {
+  width: 100%;
+  max-width: 900px;
+  display: flex;
+  flex-direction: column;
+  gap: 25px;
+}
+
+.Report-Cart {
+  background-color: #2a2a2a;
+  border-radius: 8px;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.4);
+  transition: box-shadow 0.2s ease, transform 0.2s ease;
+  width: 100%;
+}
+
+.Report-Cart:hover {
+  box-shadow: 0 0 15px rgba(255, 215, 0, 0.3);
+  transform: translateY(-2px);
+}
+
+/* Estilo para el enlace que envuelve ReportsCard */
+.Report-Cart a {
+  text-decoration: none;
+  color: inherit;
+  display: block;
+}
+
+/* Estilos de los elementos internos de ReportsCard*/
+.Report-Cart a > div {
+  display: flex;
+  align-items: center;
+  padding: 15px;
+  gap: 20px;
+  color: #ffffff;
+}
+.pagination-container {
+  display: flex;
+  justify-content: center;
+  gap: 30px;
+  margin-top: 20px;
+  width: 100%;
+  max-width: 900px;
+}
+
+.Next-Page,
+.Previous-Page {
+  background-color: transparent;
+  color: #ffd700;
+  border: 1px solid #ffd700;
+  padding: 10px 20px;
+  border-radius: 6px;
+  cursor: pointer;
+  font-weight: 500;
+  transition: background-color 0.2s ease, color 0.2s ease;
+}
+
+.Next-Page:hover,
+.Previous-Page:hover {
+  background-color: #ffd700;
+  color: #222222;
+}
+
+.report-detail-view {
+  width: 100%;
+  max-width: 900px;
+  padding: 20px;
+  background-color: #2a2a2a;
+  border-radius: 8px;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.4);
+}
+
+@media (max-width: 768px) {
+  .report-page-container {
+    padding: 20px 10px;
+    gap: 15px;
+  }
+
+  .report-actions-wrapper {
+    flex-direction: column;
+    gap: 10px;
+    max-width: 100%;
+  }
+  .report-actions-wrapper button {
+    max-width: none;
+    width: 100%;
+  }
+
+  /* Paginación */
+  .pagination-container {
+    gap: 10px;
+  }
+
+  /* Tarjetas internas (ReportsCard) */
+  .Report-Cart a > div {
+    flex-direction: column;
+    text-align: center;
+  }
+  .report-detail-view {
+    padding: 15px;
+  }
+}

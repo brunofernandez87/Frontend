@@ -1,0 +1,89 @@
+.contact-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 80vh; /* Ocupa la mayor parte de la altura visible */
+  padding: 20px;
+  color: #ffffff;
+  font-family: Arial, sans-serif;
+}
+
+/* Estilo del formulario en sí */
+.contact-container form {
+  background-color: #222222; /* Fondo oscuro del formulario, similar al footer */
+  padding: 30px;
+  border-radius: 8px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.5); /* Sombra para que destaque */
+  width: 100%;
+  max-width: 450px; /* Ancho máximo en escritorio */
+  display: flex;
+  flex-direction: column;
+  gap: 15px; /* Espacio entre los grupos de label/input */
+}
+
+/* Estilos de las etiquetas (labels) */
+.contact-container label {
+  font-weight: bold;
+  color: #ffffff;
+  margin-bottom: 5px;
+  display: block; /* Asegura que la etiqueta ocupe toda la línea */
+}
+
+/* Estilos para todos los campos de entrada (input y textarea) */
+.contact-container input[type="text"],
+.contact-container input[type="email"],
+.contact-container textarea {
+  width: 100%;
+  padding: 12px;
+  border: 1px solid #444444;
+  border-radius: 4px;
+  background-color: #333333; /* Fondo de campo oscuro */
+  color: #ffffff; /* Texto de entrada blanco */
+  font-size: 1em;
+  box-sizing: border-box; /* Incluye padding en el ancho */
+  transition: border-color 0.3s ease, box-shadow 0.3s ease;
+}
+
+/* Estilo del campo de texto de consulta */
+.contact-container textarea {
+  resize: vertical; /* Permite redimensionar solo verticalmente */
+  min-height: 120px;
+}
+
+/* Efecto al enfocar los campos */
+.contact-container input:focus,
+.contact-container textarea:focus {
+  border-color: #ffd700; /* Borde amarillo/dorado al hacer clic */
+  outline: none;
+  box-shadow: 0 0 5px rgba(255, 215, 0, 0.5);
+}
+
+/* Estilo del botón */
+.contact-container button {
+  background-color: #ffd700; /* Color de acento amarillo/dorado */
+  color: #222222; /* Texto oscuro */
+  border: none;
+  padding: 12px 20px;
+  border-radius: 4px;
+  font-size: 1.1em;
+  font-weight: bold;
+  cursor: pointer;
+  text-transform: uppercase;
+  margin-top: 10px;
+  transition: background-color 0.3s ease, transform 0.1s ease;
+}
+.contact-container button:disabled {
+  background-color: #cccccc;
+  color: #666666;
+  cursor: not-allowed; /* Muestra el símbolo de "prohibido */
+  transform: none;
+  opacity: 0.7;
+}
+.contact-container button:disabled:hover {
+  background-color: #cccccc;
+}
+
+.contact-container button:hover {
+  background-color: #e6c200; /* Tono ligeramente más oscuro al pasar el mouse */
+  transform: translateY(-1px); /* Efecto sutil de elevación */
+}

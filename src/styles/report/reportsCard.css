@@ -1,0 +1,100 @@
+.reports-card-content {
+  display: flex;
+  align-items: center;
+  gap: 20px;
+  padding: 15px;
+  background-color: #2a2a2a;
+  color: #ffffff;
+  border-radius: 8px;
+  font-family: Arial, sans-serif;
+}
+
+.reports-card-content img {
+  width: 100px;
+  height: 100px;
+  object-fit: cover;
+  border-radius: 4px;
+  border: 1px solid #444444;
+}
+
+.reports-card-content p {
+  margin: 5px 0;
+  font-size: 0.95em;
+  line-height: 1.4;
+  color: #cccccc;
+}
+
+.reports-card-content p strong {
+  color: #ffd700;
+  font-weight: bold;
+}
+
+.reports-card-content button {
+  background-color: #ffd700;
+  color: #222222;
+  border: none;
+  padding: 10px 15px;
+  border-radius: 6px;
+  font-size: 0.9em;
+  font-weight: bold;
+  cursor: pointer;
+  text-transform: uppercase;
+  transition: background-color 0.2s ease;
+}
+
+.reports-card-content button:hover {
+  background-color: #e6c200;
+}
+
+.reports-card-content.is-detail-view {
+  flex-direction: column;
+  align-items: center;
+  padding: 30px 20px;
+  gap: 25px;
+}
+
+.reports-card-content.is-detail-view img {
+  width: 100%;
+  max-width: 600px;
+  height: auto;
+  border-radius: 8px;
+  margin-bottom: 10px;
+}
+
+.reports-card-content.is-detail-view > div:nth-child(2),
+.reports-card-content.is-detail-view > div:nth-child(3) {
+  width: 100%;
+  max-width: 600px;
+  text-align: left;
+}
+
+.reports-card-content.is-detail-view p {
+  font-size: 1em;
+  margin: 8px 0;
+}
+
+.reports-card-content.is-detail-view > div:last-child {
+  width: 100%;
+  max-width: 600px;
+  display: flex;
+  justify-content: flex-end;
+  margin-top: 20px;
+}
+
+@media (max-width: 600px) {
+  .reports-card-content.is-detail-view {
+    padding: 20px 10px;
+    gap: 15px;
+  }
+
+  .reports-card-content.is-detail-view img {
+    max-width: 100%;
+  }
+
+  .reports-card-content.is-detail-view > div:nth-child(2),
+  .reports-card-content.is-detail-view > div:nth-child(3),
+  .reports-card-content.is-detail-view > div:last-child {
+    text-align: center;
+    justify-content: center;
+  }
+}

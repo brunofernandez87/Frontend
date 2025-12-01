@@ -1,0 +1,122 @@
+[
+  {
+    "id_user": 1,
+    "email": "gvanhaeften0@vimeo.com",
+    "password_hash": "password_1",
+    "rol": "cliente",
+    "create": "10/13/2025",
+    "name": "Gayler",
+    "image": "https://randomuser.me/api/portraits/men/1.jpg",
+    "username": "gvanhaeften0"
+  },
+  {
+    "id_user": 2,
+    "email": "jwinchcum1@samsung.com",
+    "password_hash": "password_2",
+    "rol": "cliente",
+    "create": "8/4/2025",
+    "name": "Jacquenette",
+    "image": "https://randomuser.me/api/portraits/women/2.jpg",
+    "username": "jwinchcum1"
+  },
+  {
+    "id_user": 3,
+    "email": "cgilbanks2@rediff.com",
+    "password_hash": "password_3",
+    "rol": "cliente",
+    "create": "11/11/2024",
+    "name": "Calhoun",
+    "image": "https://randomuser.me/api/portraits/men/3.jpg",
+    "username": "cgilbanks2"
+  },
+  {
+    "id_user": 4,
+    "email": "krenoden3@uiuc.edu",
+    "password_hash": "password_4",
+    "rol": "cliente",
+    "create": "9/17/2025",
+    "name": "Katee",
+    "image": "https://randomuser.me/api/portraits/women/4.jpg",
+    "username": "krenoden3"
+  },
+  {
+    "id_user": 5,
+    "email": "rwhitaker4@comsenz.com",
+    "password_hash": "password_5",
+    "rol": "cliente",
+    "create": "7/3/2025",
+    "name": "Randell",
+    "image": "https://randomuser.me/api/portraits/men/5.jpg",
+    "username": "rwhitaker4"
+  },
+  {
+    "id_user": 6,
+    "email": "tpuckring5@bandcamp.com",
+    "password_hash": "password_6",
+    "rol": "cliente",
+    "create": "3/29/2025",
+    "name": "Tracie",
+    "image": "https://randomuser.me/api/portraits/women/6.jpg",
+    "username": "tpuckring5"
+  },
+  {
+    "id_user": 7,
+    "email": "gmckern6@salon.com",
+    "password_hash": "password_7",
+    "rol": "cliente",
+    "create": "6/28/2025",
+    "name": "Giselbert",
+    "image": "https://randomuser.me/api/portraits/men/7.jpg",
+    "username": "gmckern6"
+  },
+  {
+    "id_user": 8,
+    "email": "wgorhardt7@cafepress.com",
+    "password_hash": "password_8",
+    "rol": "cliente",
+    "create": "3/12/2025",
+    "name": "Willem",
+    "image": "https://randomuser.me/api/portraits/men/8.jpg",
+    "username": "wgorhardt7"
+  },
+  {
+    "id_user": 9,
+    "email": "afounds8@360.cn",
+    "password_hash": "password_9",
+    "rol": "cliente",
+    "create": "7/15/2025",
+    "name": "Anstice",
+    "image": "https://randomuser.me/api/portraits/women/9.jpg",
+    "username": "afounds8"
+  },
+  {
+    "id_user": 10,
+    "email": "aleopold9@slate.com",
+    "password_hash": "password_10",
+    "rol": "cliente",
+    "create": "7/12/2025",
+    "name": "Adriane",
+    "image": "https://randomuser.me/api/portraits/women/10.jpg",
+    "username": "aleopold9"
+  },
+  {
+    "id_user": 11,
+    "email": "admin@admin.com",
+    "password_hash": "admin",
+    "rol": "vendedor",
+    "create": "7/12/2025",
+    "name": "ElAdmin",
+    "image": "https://randomuser.me/api/portraits/women/10.jpg",
+    "username": "admin"
+  },
+  {
+    "id_user": 12,
+    "email": "vendedor@vendedor.com",
+    "password_hash": "vendedor",
+    "rol": "vendedor",
+    "create": "2/12/2025",
+    "name": "ElVentas",
+    "image": "https://randomuser.me/api/portraits/men/10.jpg",
+    "username": "vendedor"
+  }
+]

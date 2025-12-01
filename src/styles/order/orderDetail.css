@@ -1,0 +1,32 @@
+.order-detail-container {
+  background-color: #222222;
+  color: #ffffff;
+  margin: 40px auto;
+  padding: 30px;
+  border-radius: 8px;
+  max-width: 700px;
+  box-shadow: 0 6px 12px rgba(0, 0, 0, 0.5);
+  font-family: Arial, sans-serif;
+}
+
+/* Estilo de cada ítem/producto dentro del detalle */
+.order-detail-item {
+  background-color: #2a2a2a;
+  padding: 15px;
+  border-radius: 6px;
+  margin-bottom: 15px;
+  border-left: 5px solid #ffd700;
+}
+
+/* Estilo de los párrafos de detalle del producto */
+.order-detail-item p {
+  margin: 5px 0;
+  font-size: 1em;
+}
+
+/* Resaltar valores*/
+.order-detail-item p:first-child {
+  font-weight: bold;
+  font-size: 1.1em;
+  color: #ffd700; /* Nombre del producto */
+}
