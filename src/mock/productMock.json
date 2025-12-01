@@ -7,7 +7,7 @@
     "price": 45.5,
     "stock": 850,
     "create": "2024-01-10",
-    "image": "https://picsum.photos/id/10/300/300"
+    "image": "./../assets/product_icons/1.jpeg"
   },
   {
     "id_product": 2,
