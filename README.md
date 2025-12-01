@@ -19,7 +19,7 @@ Frontend del e-commerce de insumos agrícolas **AgroInsumos**, construido con **
 ## 📁 Estructura del Proyecto
 
 Basado en la estructura real del repositorio (`branch dev`):
-```plaintext
+```ruby
 C:.
 |   .gitignore
 |   eslint.config.js
