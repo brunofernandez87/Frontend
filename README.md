@@ -199,12 +199,6 @@ npm run preview
 
 - ✔️ Diseño 100% responsive
 
-
-### ⏳ Comunicación con API externa (en proceso)
-
-- ✔️ Checkout
-- ✔️ Login / registro
-
 ### 📦 Scripts del Proyecto
 
 **NGINX**
@@ -249,7 +243,9 @@ Abrir un Pull Request.
 ### 📈 Roadmap de Mejoras
 
 - Integración completa de checkout y pasarela de pagos
-
+  
+- Comunicacion con Api Externa
+  
 - Optimización de imágenes
 
 - Sistema de favoritos
