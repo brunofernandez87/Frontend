@@ -153,4 +153,4 @@ Repositorio: https://github.com/brunofernandez87/Eccomerce-Frontend
 ---
 
 ### 📝 Última Actualización
-2025-11-23
+2025-11-30
