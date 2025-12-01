@@ -7,7 +7,7 @@
     "price": 45.5,
     "stock": 850,
     "create": "2024-01-10",
-    "image": "./../assets/product_icons/1.jpeg"
+    "image": "/product_icons/1.jpeg"
   },
   {
     "id_product": 2,
@@ -17,7 +17,7 @@
     "price": 89.9,
     "stock": 420,
     "create": "2024-02-15",
-    "image": "https://picsum.photos/id/20/300/300"
+    "image": "/product_icons/2.jpeg"
   },
   {
     "id_product": 3,
@@ -27,7 +27,7 @@
     "price": 120.0,
     "stock": 600,
     "create": "2024-03-01",
-    "image": "https://picsum.photos/id/30/300/300"
+    "image": "/product_icons/3.jpeg"
   },
   {
     "id_product": 4,
@@ -37,7 +37,7 @@
     "price": 75.25,
     "stock": 310,
     "create": "2024-04-20",
-    "image": "https://picsum.photos/id/40/300/300"
+    "image": "/product_icons/4.jpeg"
   },
   {
     "id_product": 5,
@@ -47,7 +47,7 @@
     "price": 55.7,
     "stock": 580,
     "create": "2024-05-18",
-    "image": "https://picsum.photos/id/50/300/300"
+    "image": "/product_icons/5.jpeg"
   },
   {
     "id_product": 6,
@@ -57,7 +57,7 @@
     "price": 39.95,
     "stock": 740,
     "create": "2024-06-05",
-    "image": "https://picsum.photos/id/60/300/300"
+    "image": "/product_icons/6.jpeg"
   },
   {
     "id_product": 7,
@@ -67,7 +67,7 @@
     "price": 22.1,
     "stock": 910,
     "create": "2024-07-12",
-    "image": "https://picsum.photos/id/70/300/300"
+    "image": "/product_icons/7.jpeg"
   },
   {
     "id_product": 8,
@@ -77,7 +77,7 @@
     "price": 31.4,
     "stock": 500,
     "create": "2024-08-01",
-    "image": "https://picsum.photos/id/80/300/300"
+    "image": "/product_icons/8.jpeg"
   },
   {
     "id_product": 9,
@@ -87,7 +87,7 @@
     "price": 150.0,
     "stock": 150,
     "create": "2024-09-10",
-    "image": "https://picsum.photos/id/90/300/300"
+    "image": "/product_icons/9.jpeg"
   },
   {
     "id_product": 10,
@@ -97,7 +97,7 @@
     "price": 68.0,
     "stock": 250,
     "create": "2024-10-05",
-    "image": "https://picsum.photos/id/100/300/300"
+    "image": "/product_icons/10.jpeg"
   },
   {
     "id_product": 11,
@@ -107,7 +107,7 @@
     "price": 92.5,
     "stock": 210,
     "create": "2024-11-01",
-    "image": "https://picsum.photos/id/110/300/300"
+    "image": "/product_icons/11.jpeg"
   },
   {
     "id_product": 12,
@@ -117,7 +117,7 @@
     "price": 30.8,
     "stock": 1100,
     "create": "2024-11-15",
-    "image": "https://picsum.photos/id/120/300/300"
+    "image": "/product_icons/12.jpeg"
   },
   {
     "id_product": 13,
@@ -127,7 +127,7 @@
     "price": 48.3,
     "stock": 630,
     "create": "2024-12-01",
-    "image": "https://picsum.photos/id/130/300/300"
+    "image": "/product_icons/13.jpeg"
   },
   {
     "id_product": 14,
@@ -137,7 +137,7 @@
     "price": 75.0,
     "stock": 180,
     "create": "2025-01-10",
-    "image": "https://picsum.photos/id/140/300/300"
+    "image": "/product_icons/14.jpeg"
   },
   {
     "id_product": 15,
@@ -147,6 +147,6 @@
     "price": 60.5,
     "stock": 350,
     "create": "2025-02-28",
-    "image": "https://picsum.photos/id/150/300/300"
+    "image": "/product_icons/15.jpeg"
   }
 ]
