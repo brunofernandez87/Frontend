@@ -8,10 +8,11 @@ import { useUser } from "../../context/userContext";
 import { useProductList } from "../../context/productListContext";
 import { useProductFilter } from "../../context/productFilterContext";
 export default function CardProducts() {
-  const { productList, setproductList } = useProductList();
+  const { productList, setproductList, loading } = useProductList();
   const [page, setpage] = useState(1);
   const productFilt = useMemo(() => {
-    return productList.filter((p) => p.stock > 0);
+    const safeList = productList || [];
+    return safeList.filter((p) => p.stock > 0);
   }, [productList]);
   const { productfilter, setproductfilter } = useProductFilter();
   useEffect(() => {
@@ -63,61 +64,70 @@ export default function CardProducts() {
         setpage={setpage}
         setproductfilter={setproductfilter}
       />
-      {products.map((product) => (
-        <div key={product.id_product} className="Card-Products">
-          <Link to={`/product/${product.id_product}`} className="link-Products">
-            <div className="Card-Images">
-              <img
-                src={product.image}
-                alt={product.name}
-                className="Image-product"
-              />
-            </div>
-            <div className="Card-Names">
-              <p>
-                <b>{product.name}</b>
-              </p>
-            </div>
-            <div className="Card-Descriptions">{product.description}</div>
-            <div className="Card-Categories">{product.category}</div>
-            <div className="Card-Prices">
-              <p>
-                <b>Precio: ${product.price}</b>
-              </p>
-            </div>
-          </Link>
-          {user != null && (
-            <>
-              {user.rol == "vendedor" && (
-                /* al ser admin podes eliminar */ <button
-                  className="Delete-Button"
-                  onClick={() => {
-                    setproductList((prevlist) =>
-                      prevlist.filter(
-                        (p) => p.id_product !== product.id_product
-                      )
-                    );
-                  }}
-                >
-                  X
-                </button>
+      {loading ? (
+        <p> Cargando... </p>
+      ) : (
+        <>
+          {products.map((product) => (
+            <div key={product.id_product} className="Card-Products">
+              <Link
+                to={`/product/${product.id_product}`}
+                className="link-Products"
+              >
+                <div className="Card-Images">
+                  <img
+                    src={product.image}
+                    alt={product.name}
+                    className="Image-product"
+                  />
+                </div>
+                <div className="Card-Names">
+                  <p>
+                    <b>{product.name}</b>
+                  </p>
+                </div>
+                <div className="Card-Descriptions">{product.description}</div>
+                <div className="Card-Categories">{product.category}</div>
+                <div className="Card-Prices">
+                  <p>
+                    <b>Precio: ${product.price}</b>
+                  </p>
+                </div>
+              </Link>
+              {user != null && (
+                <>
+                  {user.rol == "vendedor" && (
+                    /* al ser admin podes eliminar */ <button
+                      className="Delete-Button"
+                      onClick={() => {
+                        setproductList((prevlist) =>
+                          prevlist.filter(
+                            (p) => p.id_product !== product.id_product
+                          )
+                        );
+                      }}
+                    >
+                      X
+                    </button>
+                  )}
+                </>
               )}
-            </>
-          )}
-        </div>
-      ))}
-      <div>
-        {page > 1 && (
-          <button className="Next-Page" onClick={handleClickPrevious}>
-            Pagina anterior
-          </button>
-        )}
-        {limite < productfilter.length && (
-          <button className="Previous-Page" onClick={handleClickNext}>
-            Pagina siguiente
-          </button>
-        )}
-      </div>
+            </div>
+          ))}
+          <div>
+            {page > 1 && (
+              <button className="Next-Page" onClick={handleClickPrevious}>
+                Pagina anterior
+              </button>
+            )}
+            {limite < productfilter.length && (
+              <button className="Previous-Page" onClick={handleClickNext}>
+                Pagina siguiente
+              </button>
+            )}
+          </div>
+        </>
+      )}
     </>
   );
 }

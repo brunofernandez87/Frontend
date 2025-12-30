@@ -1,10 +1,28 @@
-import { createContext, useContext, useState } from "react";
-import productMock from "../mock/productMock.json";
+import { createContext, useContext, useEffect, useState } from "react";
+import { getAllProducts } from "../services/productService";
+// import productMock from "../mock/productMock.json";
 const productListContext = createContext(null);
 export function ProductListProvider({ children }) {
-  const [productList, setproductList] = useState(productMock);
+  const [productList, setproductList] = useState([]);
+  const [loading, setLoading] = useState(true);
+  useEffect(() => {
+    const fetchProducts = async () => {
+      setLoading(true);
+      try {
+        const data = await getAllProducts();
+        setproductList(data);
+      } catch (error) {
+        console.error("Error cargando productos:", error);
+      } finally {
+        setLoading(false);
+      }
+    };
+    fetchProducts();
+  }, []);
   return (
-    <productListContext.Provider value={{ productList, setproductList }}>
+    <productListContext.Provider
+      value={{ productList, setproductList, loading }}
+    >
       {children}
     </productListContext.Provider>
   );
