@@ -19,29 +19,152 @@ Frontend del e-commerce de insumos agrícolas **AgroInsumos**, construido con **
 ## 📁 Estructura del Proyecto
 
 Basado en la estructura real del repositorio (`branch dev`):
-```plaintext
-Eccomerce-Frontend/
-├── public/
-│ └── index.html
-├── src/
-│ ├── assets/ # imágenes, SVGs y archivos estáticos
-│ ├── components/ # componentes reutilizables
-│ ├── pages/ # páginas principales del sitio
-│ ├── routes/ # configuración de rutas
-│ ├── services/ # comunicación con API (fetch/axios)
-│ ├── store/ # estado global (Context, Zustand, Redux, etc.)
-│ ├── styles/ # estilos globales / parciales
-│ └── utils/ # helpers y utilidades
-├── .gitignore
-├── .dockerignore
-├── Dockerfile # preparación para despliegue con Nginx
-├── nginx.conf # configuración de Nginx
-├── eslint.config.js
-├── tsconfig.json
-├── tsconfig.app.json
-├── tsconfig.node.json
-├── vite.config.ts
-└── package.json
+```ruby
+C:.
+|   .gitignore
+|   eslint.config.js
+|   index.html
+|   LICENSE
+|   package-lock.json
+|   package.json
+|   README.md
+|   tsconfig.app.json
+|   tsconfig.json
+|   tsconfig.node.json
+|   vite.config.ts
+|   
++---public
+|   |   vite.svg
+|   |   
+|   \---product_icons
+|           1.jpeg
+|           10.jpeg
+|           11.jpeg
+|           12.jpeg
+|           13.jpeg
+|           14.jpeg
+|           15.jpeg
+|           2.jpeg
+|           3.jpeg
+|           4.jpeg
+|           5.jpeg
+|           6.jpeg
+|           7.jpeg
+|           8.jpeg
+|           9.jpeg
+|
+\---src
+    |   App.css
+    |   App.tsx
+    |   index.css
+    |   main.tsx
+    |   routes.tsx
+    |
+    +---assets
+    |   |   error.png
+    |   |   Logo eccomerce.jpeg
+    |   |   mockReporte.jpg
+    |   |
+    |   \---RedesSociales
+    |           googleMaps.svg
+    |           instagram-icon.svg
+    |           linkedin.svg
+    |           microsoft-outlook.svg
+    |           whatsapp-icon.svg
+    |
+    +---components
+    |   |   aboutUs.tsx
+    |   |   adminGuard.tsx
+    |   |   cart.tsx
+    |   |   contact.tsx
+    |   |   errorPage.tsx
+    |   |   filterCategory.tsx
+    |   |   home.tsx
+    |   |
+    |   +---footer
+    |   |       footer.tsx
+    |   |
+    |   +---header
+    |   |       header.tsx
+    |   |
+    |   +---order
+    |   |       createOrder.tsx
+    |   |       order.tsx
+    |   |       orderDetail.tsx
+    |   |
+    |   +---product
+    |   |       cardProduct.tsx
+    |   |       cardProducts.tsx
+    |   |       createProduct.tsx
+    |   |       searchCategory.tsx
+    |   |       selectProduct.tsx
+    |   |
+    |   +---report
+    |   |       report.tsx
+    |   |       reportsCard.tsx
+    |   |
+    |   \---user
+    |           changePassword.tsx
+    |           login.tsx
+    |           modificateUser.tsx
+    |           profile.tsx
+    |           recovery.tsx
+    |           register.tsx
+    |           users.tsx
+    |
+    +---context
+    |       cartContext.tsx
+    |       orderDetailListContext.tsx
+    |       orderListContext.tsx
+    |       orderListFilterContext.tsx
+    |       productFilterContext.tsx
+    |       productListContext.tsx
+    |       reportListContext.tsx
+    |       reportListFilterContext.tsx
+    |       userContext.tsx
+    |       userListContext.tsx
+    |       userListFilterContext.tsx
+    |
+    +---mock
+    |       orderDetailMock.json
+    |       orderMock.json
+    |       productMock.json
+    |       reportMock.json
+    |       userMock.json
+    |
+    \---styles
+        |   aboutUs.css
+        |   cart.css
+        |   contact.css
+        |   errorPage.css
+        |   footer.css
+        |   header.css
+        |   login.css
+        |   profile.css
+        |   recovery.css
+        |   register.css
+        |
+        +---order
+        |       order.css
+        |       orderDetail.css
+        |
+        +---product
+        |       cardProduct.css
+        |       cardsproducts.css
+        |       createProduct.css
+        |
+        +---report
+        |       report.css
+        |       reportsCard.css
+        |
+        \---user
+                changePassword.css
+                login.css
+                modificateUser.css
+                profile.css
+                recovery.css
+                register.css
+                users.css
 ```
 ---
 
@@ -75,12 +198,6 @@ npm run preview
 - ✔️ Filtros por categoría / tipo
 
 - ✔️ Diseño 100% responsive
-
-
-### ⏳ Comunicación con API externa (en proceso)
-
-- ✔️ Checkout
-- ✔️ Login / registro
 
 ### 📦 Scripts del Proyecto
 
@@ -126,7 +243,9 @@ Abrir un Pull Request.
 ### 📈 Roadmap de Mejoras
 
 - Integración completa de checkout y pasarela de pagos
-
+  
+- Comunicacion con Api Externa
+  
 - Optimización de imágenes
 
 - Sistema de favoritos
@@ -153,4 +272,4 @@ Repositorio: https://github.com/brunofernandez87/Eccomerce-Frontend
 ---
 
 ### 📝 Última Actualización
-2025-11-23
+2025-11-30
