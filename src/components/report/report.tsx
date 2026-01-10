@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import image from "../../assets/mockReporte.jpg";
 import ReportsCard from "./reportsCard";
 import { Link, useNavigate, useParams } from "react-router-dom";
@@ -8,118 +8,160 @@ import FilterCategory from "../filterCategory";
 import { useReportList } from "../../context/reportListContext";
 import { useReportListFilter } from "../../context/reportListFilterContext";
 import SearchCategory from "../product/searchCategory";
+import { getAllReports, createReportApi } from "../../services/reportService";
 
 export default function Report() {
   const { id } = useParams();
-  const date = new Date();
   const { user } = useUser();
   const [page, setpage] = useState(1);
   const { reportList, setreportList } = useReportList();
   const { reportListFilter, setreportListFilter } = useReportListFilter();
-  // esto mas adelante lo va a realizar el back es de ejemplo
-  const maxReports = 5;
-  const limite = page * maxReports;
-  const limiteant = limite - maxReports;
-  const reports = reportListFilter.slice(limiteant, limite);
   const navigate = useNavigate();
-  let report = null;
-  if (id) {
-    report = reportList.find((r) => r.id_report == parseInt(id));
-  }
-  function handleClickPrevious() {
-    setpage(page - 1);
-  }
-  function handleClickNext() {
-    setpage(page + 1);
-  }
-  function createReport() {
-    setpage(1);
-    const username = user.username;
-    const id = reportList.length + 1;
-    const newReport = {
-      id_report: id,
-      date_generated: date.toLocaleDateString(),
-      generated_by_user: username,
-    };
-    const updatedReport = [...reportList, newReport];
-    setreportList(updatedReport);
-  }
-  function filterReport(event) {
-    const value = event.target.value;
-    if (value == "") {
-      setreportListFilter(reportList);
-      setpage(1);
-      return;
+
+  const formatDate = (dateStr: any) => {
+    if (!dateStr) return "Sin fecha";
+    try {
+      const dateObj = new Date(dateStr);
+      if (isNaN(dateObj.getTime())) return String(dateStr);
+      return dateObj.toLocaleDateString("es-ES");
+    } catch {
+      return "Sin fecha";
     }
-    const result = reportList.filter((r) => r.generated_by_user == value);
-    setpage(1);
-    setreportListFilter(result);
+  };
+
+  useEffect(() => {
+    const fetchReports = async () => {
+      try {
+        const data = await getAllReports();
+        if (data) {
+          setreportList(data);
+        }
+      } catch (error) {
+        console.error("Error al cargar reportes:", error);
+      }
+    };
+    fetchReports();
+  }, [setreportList]);
+
+  const maxReports = 5;
+  const totalReports = reportListFilter?.length || 0;
+  const reports = (reportListFilter || []).slice(
+    (page - 1) * maxReports,
+    page * maxReports
+  );
+
+  const reportDetail = id
+    ? (reportList || []).find((r: any) => r.id_report === parseInt(id))
+    : null;
+
+  async function createReport() {
+    // Verificamos qué nombre tiene el usuario en tu contexto
+    const nombreUsuario = user?.username || user?.name || "vendedor";
+
+    const newReportRequest = {
+      date_generated: new Date().toISOString(),
+      generated_by_user: nombreUsuario,
+    };
+
+    try {
+      const savedReport = await createReportApi(newReportRequest);
+      if (savedReport) {
+        const normalized = {
+          ...savedReport,
+          generated_by_user: savedReport.generated_by_user || nombreUsuario,
+          date_generated:
+            savedReport.date_generated ||
+            savedReport.createdAt ||
+            new Date().toISOString(),
+          id_report: savedReport.id_report || savedReport.id || Date.now(),
+        };
+        setreportList((prev: any) => [...prev, normalized]);
+        setpage(1);
+      }
+    } catch (error) {
+      console.error("Error al crear:", error);
+    }
   }
+
   return (
     <div className="report-page-container">
       <SearchCategory
-        productFilt={reportList}
+        productFilt={reportList || []}
         setproductfilter={setreportListFilter}
         category="date_generated"
         label="Buscar por fecha DD/MM/YY"
       />
-      {!report && (
+
+      {!reportDetail && (
         <div className="report-actions-wrapper">
           <button onClick={createReport}>Crear reporte</button>
-          <button
-            onClick={() => {
-              setpage(1);
-              navigate("/report");
-            }}
-          >
-            Mostrar Reportes
-          </button>
         </div>
       )}
 
-      {!report ? (
+      {!reportDetail ? (
         <div className="report-list-container">
           <FilterCategory
-            products={reportList}
+            products={reportList || []}
             category={"generated_by_user"}
-            filter={filterReport}
-            label={"Visualizar el reporte de"}
+            filter={(e: any) => {
+              const val = e.target.value;
+              if (!val) {
+                setreportListFilter(reportList);
+              } else {
+                setreportListFilter(
+                  reportList.filter((r: any) => r.generated_by_user === val)
+                );
+              }
+              setpage(1);
+            }}
+            label={"Visualizar todos los reportes"}
           />
-          {reports.map((r) => (
-            <div key={r.id_report} className="Report-Cart">
-              <Link to={`/report/${r.id_report}`}>
-                <ReportsCard
-                  image={image}
-                  date={r.date_generated}
-                  username={r.generated_by_user}
-                  print={false}
-                />
-              </Link>
-            </div>
-          ))}
+
+          {reports.length > 0 ? (
+            reports.map((r: any) => (
+              <div
+                key={r.id_report || r.id || Math.random()}
+                className="Report-Cart"
+              >
+                <Link to={`/report/${r.id_report || r.id}`}>
+                  <ReportsCard
+                    image={image}
+                    date={formatDate(r.date_generated || r.createdAt)}
+                    username={r.generated_by_user || "vendedor"}
+                    print={false}
+                  />
+                </Link>
+              </div>
+            ))
+          ) : (
+            <p
+              style={{ color: "white", textAlign: "center", marginTop: "20px" }}
+            >
+              Cargando reportes o lista vacía...
+            </p>
+          )}
         </div>
       ) : (
         <div className="report-detail-view">
+          <button onClick={() => navigate("/report")}>← Volver</button>
           <ReportsCard
             image={image}
-            date={report?.date_generated}
-            username={report?.generated_by_user}
+            date={formatDate(
+              reportDetail.date_generated || reportDetail.createdAt
+            )}
+            username={reportDetail.generated_by_user || "vendedor"}
             print={true}
           />
         </div>
       )}
 
-      {!report && (
+      {!reportDetail && totalReports > maxReports && (
         <div className="pagination-container">
           {page > 1 && (
-            <button className="Next-Page" onClick={handleClickPrevious}>
-              Pagina anterior
-            </button>
+            <button onClick={() => setpage(page - 1)}>Anterior</button>
           )}
-          {limite < reportListFilter.length && (
-            <button className="Previous-Page" onClick={handleClickNext}>
-              Pagina siguiente
-            </button>
+          {page * maxReports < totalReports && (
+            <button onClick={() => setpage(page + 1)}>Siguiente</button>
           )}
         </div>
       )}
