@@ -1,10 +1,26 @@
-import { createContext, useContext, useMemo, useState } from "react";
+import { createContext, useContext, useEffect, useMemo, useState } from "react";
 import { useUser } from "./userContext";
-import orderMock from "../mock/orderMock.json";
+// import orderMock from "../mock/orderMock.json";
+import { getAllOrders } from "../services/orderService";
 const orderListContext = createContext(null);
 export default function OrderListProvider({ children }) {
   const { user } = useUser();
-  const [orderList, setorderList] = useState(orderMock);
+  const [orderList, setorderList] = useState([]);
+  const [loading, setLoading] = useState(true);
+  useEffect(() => {
+    const fetchOrders = async () => {
+      setLoading(true);
+      try {
+        const data = await getAllOrders();
+        setorderList(data);
+      } catch (error) {
+        console.error("Error cargando productos:", error);
+      } finally {
+        setLoading(false);
+      }
+    };
+    fetchOrders();
+  }, []);
   const filteredOrders = useMemo(() => {
     if (!user) {
       return [];
@@ -12,7 +28,7 @@ export default function OrderListProvider({ children }) {
     if (user.rol == "vendedor") {
       return orderList;
     }
-    return orderList.filter((o) => o.id_user === user.username);
+    return orderList.filter((o) => o.id_user === user.id_user);
   }, [user, orderList]);
 
   return (
@@ -21,6 +37,7 @@ export default function OrderListProvider({ children }) {
         orderList: filteredOrders,
         setorderList,
         allOrders: orderList,
+        loading,
       }}
     >
       {children}
