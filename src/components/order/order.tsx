@@ -5,6 +5,7 @@ import FilterCategory from "../filterCategory";
 import "../../styles/order/order.css";
 import { useOrderListFilter } from "../../context/orderListFilterContext";
 import SearchCategory from "../product/searchCategory";
+import { eliminateOrder } from "../../services/orderService";
 export default function Order() {
   const { orderList, setorderList } = useOrderList();
   const { orderListFilter, setorderListFilter } = useOrderListFilter();
@@ -34,6 +35,27 @@ export default function Order() {
     setpage(1);
     setorderListFilter(result);
   }
+  const handleCancel = async (id_order) => {
+    if (!window.confirm("¿Estás seguro de que deseas cancelar este pedido?")) {
+      return;
+    }
+    try {
+      await eliminateOrder(id_order);
+      setorderList((prevList) =>
+        prevList.filter((r) => r.id_order !== id_order)
+      );
+      setorderListFilter((prevFilter) =>
+        prevFilter.filter((r) => r.id_order !== id_order)
+      );
+
+      alert("Pedido cancelado y eliminado con éxito");
+    } catch (error) {
+      console.error(error);
+      alert(
+        "Error al cancelar el pedido. Verifica que no tenga detalles asociados o intenta más tarde."
+      );
+    }
+  };
   return (
     <div className="orders-page-container">
       <FilterCategory
@@ -67,13 +89,7 @@ export default function Order() {
               <button
                 className="cancel-order-button"
                 onClick={() => {
-                  setorderList((prevList) =>
-                    prevList.filter((r) => r.id_order !== o.id_order)
-                  );
-                  setorderListFilter((prevFilter) =>
-                    prevFilter.filter((r) => r.id_order !== o.id_order)
-                  );
-                  alert("Pedido eliminado");
+                  handleCancel(o.id_order);
                 }}
               >
                 Cancelar pedido
