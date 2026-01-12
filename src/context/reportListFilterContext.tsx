@@ -1,12 +1,17 @@
 import { createContext, useContext, useState, useEffect } from "react";
 import { useReportList } from "./reportListContext";
 
-const reportListFilterContext = createContext(null);
+const reportListFilterContext = createContext<any>(null);
 
-export function ReportListFilterProvider({ children }) {
+export function ReportListFilterProvider({
+  children,
+}: {
+  children: React.ReactNode;
+}) {
   const { reportList } = useReportList();
-  const [reportListFilter, setreportListFilter] = useState(reportList);
+  const [reportListFilter, setreportListFilter] = useState<any[]>(reportList);
 
+  //Cuando reportList recibe los datos de la DB, actualizamos para que se vean en pantalla.
   useEffect(() => {
     setreportListFilter(reportList);
   }, [reportList]);

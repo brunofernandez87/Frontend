@@ -22,6 +22,7 @@ export default function Report() {
     if (!dateStr) return "Sin fecha";
     try {
       const dateObj = new Date(dateStr);
+      // Si la fecha no es válida, devolvemos el string original
       if (isNaN(dateObj.getTime())) return String(dateStr);
       return dateObj.toLocaleDateString("es-ES");
     } catch {
@@ -44,8 +45,10 @@ export default function Report() {
   }, [setreportList]);
 
   const maxReports = 5;
-  const totalReports = reportListFilter?.length || 0;
-  const reports = (reportListFilter || []).slice(
+  // Usamos [] para que no falle si la base de datos aún no responde
+  const safeFilterList = reportListFilter || [];
+  const totalReports = safeFilterList.length;
+  const reports = safeFilterList.slice(
     (page - 1) * maxReports,
     page * maxReports
   );
@@ -55,11 +58,11 @@ export default function Report() {
     : null;
 
   async function createReport() {
-    // Verificamos qué nombre tiene el usuario en tu contexto
     const nombreUsuario = user?.username || user?.name || "vendedor";
+    const fechaISO = new Date().toISOString();
 
     const newReportRequest = {
-      date_generated: new Date().toISOString(),
+      date_generated: fechaISO,
       generated_by_user: nombreUsuario,
     };
 
@@ -70,21 +73,22 @@ export default function Report() {
           ...savedReport,
           generated_by_user: savedReport.generated_by_user || nombreUsuario,
           date_generated:
-            savedReport.date_generated ||
-            savedReport.createdAt ||
-            new Date().toISOString(),
+            savedReport.date_generated || savedReport.createdAt || fechaISO,
           id_report: savedReport.id_report || savedReport.id || Date.now(),
         };
         setreportList((prev: any) => [...prev, normalized]);
         setpage(1);
+        alert("Reporte creado con éxito");
       }
     } catch (error) {
       console.error("Error al crear:", error);
+      alert("No se pudo crear el reporte");
     }
   }
 
   return (
     <div className="report-page-container">
+      {/* Buscador por fecha */}
       <SearchCategory
         productFilt={reportList || []}
         setproductfilter={setreportListFilter}
@@ -114,7 +118,7 @@ export default function Report() {
               }
               setpage(1);
             }}
-            label={"Visualizar todos los reportes"}
+            label={"Visualizar el reporte de"}
           />
 
           {reports.length > 0 ? (
@@ -134,16 +138,14 @@ export default function Report() {
               </div>
             ))
           ) : (
-            <p
-              style={{ color: "white", textAlign: "center", marginTop: "20px" }}
-            >
-              Cargando reportes o lista vacía...
-            </p>
+            <p className="loading-text">Cargando reportes o lista vacía...</p>
           )}
         </div>
       ) : (
         <div className="report-detail-view">
-          <button onClick={() => navigate("/report")}>← Volver</button>
+          <button onClick={() => navigate("/report")} className="btn-back">
+            ← Volver a la lista
+          </button>
           <ReportsCard
             image={image}
             date={formatDate(
@@ -155,6 +157,7 @@ export default function Report() {
         </div>
       )}
 
+      {/* PAGINACIÓN*/}
       {!reportDetail && totalReports > maxReports && (
         <div className="pagination-container">
           {page > 1 && (
