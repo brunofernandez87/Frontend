@@ -29,3 +29,15 @@ export const createOrder = async (orderData) => {
     throw error;
   }
 };
+export const modifyOrder = async (id, newState) => {
+  try {
+    const response = await axios.put(`${API_URL}/order`, {
+      id_order: id,
+      state: newState,
+    });
+    return response.data;
+  } catch (error) {
+    console.error("Error modify order", error);
+    throw error;
+  }
+};

@@ -5,16 +5,20 @@ import FilterCategory from "../filterCategory";
 import "../../styles/order/order.css";
 import { useOrderListFilter } from "../../context/orderListFilterContext";
 import SearchCategory from "../product/searchCategory";
-import { eliminateOrder } from "../../services/orderService";
+import { eliminateOrder, modifyOrder } from "../../services/orderService";
+import { useUser } from "../../context/userContext";
+import toast from "react-hot-toast";
 export default function Order() {
   const { orderList, setorderList } = useOrderList();
   const { orderListFilter, setorderListFilter } = useOrderListFilter();
   const [page, setpage] = useState(1);
+  const { user } = useUser();
   const maxItem = 5;
   const limit = page * maxItem;
   const limitAnt = limit - maxItem;
   const safeList = orderListFilter || [];
   const orderFilter = safeList.slice(limitAnt, limit);
+  const [editOrderId, setEditOrderId] = useState(null);
 
   function handleClickNext() {
     window.scrollTo({ top: 0, behavior: "smooth" });
@@ -56,6 +60,25 @@ export default function Order() {
       );
     }
   };
+  const handleModify = async (id_order, newState) => {
+    try {
+      await modifyOrder(id_order, newState);
+      const updateLists = (list) =>
+        list.map((order) => {
+          if (order.id_order === id_order) {
+            return { ...order, state: newState };
+          }
+          return order;
+        });
+      setorderList((prev) => updateLists(prev));
+      setorderListFilter((prev) => updateLists(prev));
+      toast.success(`Estado actualizado a: ${newState}`);
+      setEditOrderId(null);
+    } catch (error) {
+      console.error(error);
+      toast.error("No se pudo actualizar el estado");
+    }
+  };
   return (
     <div className="orders-page-container">
       <FilterCategory
@@ -71,32 +94,73 @@ export default function Order() {
         label="buscar por fecha DD/MM/YY"
       />
       <div className="order-card-wrapper">
-        {orderFilter.map((o) => (
-          <div key={o.id_order} className="order-card">
-            <Link
-              to={`/orderDetail/${o?.id_order}`}
-              className="order-details-link"
-            >
-              <span className="order-date">Fecha: {o?.date}</span>
-              <div className="order-status-group">
-                <span className="order-state">Estado: {o?.state}</span>
-                <span className="order-user">Usuario: {o?.id_user}</span>
-              </div>
-              <span className="order-total-value">Total: ${o?.total}</span>
-            </Link>
+        {orderFilter.map((o) => {
+          const isEditing = editOrderId === o.id_order;
 
-            {(o.state === "en preparacion" || o.state === "en camino") && (
-              <button
-                className="cancel-order-button"
-                onClick={() => {
-                  handleCancel(o.id_order);
-                }}
+          return (
+            <div key={o.id_order} className="order-card">
+              <Link
+                to={`/orderDetail/${o?.id_order}`}
+                className="order-details-link"
               >
-                Cancelar pedido
-              </button>
-            )}
-          </div>
-        ))}
+                <span className="order-date">Fecha: {o?.date}</span>
+                <div className="order-status-group">
+                  {!isEditing && (
+                    <span className="order-state">Estado: {o?.state}</span>
+                  )}
+                  <span className="order-user">Usuario: {o?.id_user}</span>
+                </div>
+                <span className="order-total-value">Total: ${o?.total}</span>
+              </Link>
+              <div>
+                {user?.rol === "vendedor" && o.state !== "entregado" && (
+                  <div className="admin-actions">
+                    {isEditing ? (
+                      <div style={{ display: "flex", gap: "5px" }}>
+                        <select
+                          className="status-select"
+                          value={o.state}
+                          onChange={(e) =>
+                            handleModify(o.id_order, e.target.value)
+                          }
+                          autoFocus
+                        >
+                          <option value="en preparacion">En preparación</option>
+                          <option value="en camino">En camino</option>
+                          <option value="entregado">Entregado</option>
+                        </select>
+                        <button
+                          className="cancel-modify"
+                          onClick={() => setEditOrderId(null)}
+                          title="Cancelar edición"
+                        >
+                          ✖
+                        </button>
+                      </div>
+                    ) : (
+                      <button
+                        className="modify-button"
+                        onClick={() => setEditOrderId(o.id_order)}
+                      >
+                        Modificar Estado
+                      </button>
+                    )}
+                  </div>
+                )}
+                {(o.state === "en preparacion" || o.state === "en camino") && (
+                  <button
+                    className="cancel-order-button"
+                    onClick={() => {
+                      handleCancel(o.id_order);
+                    }}
+                  >
+                    Cancelar pedido
+                  </button>
+                )}
+              </div>
+            </div>
+          );
+        })}
       </div>
       <div className="pagination-container">
         {page > 1 && (
