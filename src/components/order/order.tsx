@@ -46,17 +46,17 @@ export default function Order() {
     try {
       await eliminateOrder(id_order);
       setorderList((prevList) =>
-        prevList.filter((r) => r.id_order !== id_order)
+        prevList.filter((r) => r.id_order !== id_order),
       );
       setorderListFilter((prevFilter) =>
-        prevFilter.filter((r) => r.id_order !== id_order)
+        prevFilter.filter((r) => r.id_order !== id_order),
       );
 
       alert("Pedido cancelado y eliminado con éxito");
     } catch (error) {
       console.error(error);
       alert(
-        "Error al cancelar el pedido. Verifica que no tenga detalles asociados o intenta más tarde."
+        "Error al cancelar el pedido. Verifica que no tenga detalles asociados o intenta más tarde.",
       );
     }
   };
@@ -91,7 +91,7 @@ export default function Order() {
         productFilt={orderList}
         setproductfilter={setorderListFilter}
         category="date"
-        label="buscar por fecha DD/MM/YY"
+        label="buscar por fecha YY/MM/DD"
       />
       <div className="order-card-wrapper">
         {orderFilter.map((o) => {
