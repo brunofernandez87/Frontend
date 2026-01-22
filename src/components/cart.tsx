@@ -18,7 +18,7 @@ export default function Cart() {
     return cartContent.reduce(
       // Suma el precio por la cantidad
       (sum, product) => sum + product.price * (product.quantity || 1),
-      0
+      0,
     );
   }, [cartContent]);
   const isCartEmpty = cartContent.length === 0;
@@ -29,12 +29,20 @@ export default function Cart() {
     }
     setLoading(true);
     try {
+      const userId = user.id_user || user.id;
+      if (!userId) {
+        console.error("ERROR CRÍTICO: El usuario no tiene ID", user);
+        toast.error("Error con tu sesión. Por favor sal y vuelve a entrar.");
+        return;
+      }
       const orderData = {
-        id_user: user.id_user,
+        id_user: userId,
         date: new Date().toISOString().slice(0, 10),
         total: total,
         state: "en preparacion",
       };
+      console.log("INTENTANDO COMPRAR CON ESTOS DATOS:", orderData);
+      console.log("EL USUARIO ACTUAL ES:", user);
       const createdOrder = await createOrder(orderData);
       const orderId = createdOrder.result
         ? createdOrder.result.id_order
@@ -89,7 +97,7 @@ export default function Cart() {
                     onClick={() =>
                       updateQuantity(
                         product.id_product,
-                        (product.quantity || 1) - 1
+                        (product.quantity || 1) - 1,
                       )
                     }
                     className="qty-btn remove-btn"
@@ -101,7 +109,7 @@ export default function Cart() {
                     onClick={() =>
                       updateQuantity(
                         product.id_product,
-                        (product.quantity || 1) + 1
+                        (product.quantity || 1) + 1,
                       )
                     }
                     className="qty-btn add-btn"
