@@ -1,39 +1,48 @@
 import { useUser } from "../../context/userContext";
 import { Navigate, useNavigate } from "react-router-dom";
-import { useUserList } from "../../context/userListContext";
+import { updateUser } from "../../services/userService";
+import toast from "react-hot-toast";
 import "../../styles/user/modificateUser.css";
+import { useState } from "react";
 export default function ModificateUser() {
   const { user, setuser } = useUser();
-  const { userList, setuserList } = useUserList();
   const navigate = useNavigate();
+  const [loading, setLoading] = useState(false);
   if (!user) {
     const error = "Sesion no iniciada";
     return <Navigate to={`/error/${error}`} replace />;
   }
-  function modificateUser(event) {
+  async function modificateUser(event) {
+    setLoading(true);
     event.preventDefault();
     const formData = new FormData(event.target);
-    const file = formData.get("image");
-    let image = user.image;
-    if (file && file.size > 0) {
-      image = URL.createObjectURL(file);
-    }
-    const updatedUser = {
-      ...user,
-      email: formData.get("email"),
+    const dataToUpdate = {
       name: formData.get("name"),
-      image: image,
+      email: formData.get("email"),
       username: formData.get("username"),
+      image: user.image,
     };
-    setuser(updatedUser);
-    const copylist = userList.map((u) => {
-      if (u.id_user === updatedUser.id_user) {
-        return updatedUser;
+    try {
+      const response = await updateUser(user.id_user, dataToUpdate, user.token);
+
+      console.log("Respuesta del server:", response);
+      const updatedUserContext = {
+        ...user,
+        ...dataToUpdate,
+      };
+      setuser(updatedUserContext);
+      toast.success("Datos actualizados correctamente");
+      navigate("/profile");
+    } catch (error) {
+      console.error(error);
+      if (error.response && error.response.data) {
+        toast.error(error.response.data.message || "Error al actualizar");
+      } else {
+        toast.error("Error del servidor. Intenta más tarde.");
       }
-      return u;
-    });
-    setuserList(copylist);
-    navigate(`/profile/${updatedUser.username}/${updatedUser.password_hash}`);
+    } finally {
+      setLoading(false);
+    }
   }
   return (
     <div className="user-modification-container">
@@ -57,7 +66,9 @@ export default function ModificateUser() {
         />
         <label> Username: </label>
         <input type="text" name="username" defaultValue={user.username} />
-        <button type="submit">Guardar Cambios </button>
+        <button type="submit">
+          {loading ? "Guardando..." : "Guardar Cambios"}
+        </button>
       </form>
     </div>
   );
