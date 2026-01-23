@@ -2,6 +2,8 @@ import { Link, Navigate, useParams } from "react-router-dom";
 import { useState } from "react";
 import { useUser } from "../../context/userContext";
 import { useProductList } from "../../context/productListContext";
+import { updateProduct } from "../../services/productService";
+import toast from "react-hot-toast";
 import "../../styles/product/cardProduct.css";
 export default function CardProduct(props) {
   const { productList, setproductList } = useProductList();
@@ -9,6 +11,7 @@ export default function CardProduct(props) {
   const { productID, cartIN, addtocart } = props;
   const { id } = useParams();
   const [modified, setmodified] = useState(false);
+  const [loading, setLoading] = useState(false);
   function onClickModified() {
     setmodified(!modified);
   }
@@ -18,31 +21,43 @@ export default function CardProduct(props) {
       initProduct = productList.find((input) => input.id_product === productID);
     } else {
       initProduct = productList.find(
-        (input) => input.id_product === parseInt(id)
+        (input) => input.id_product === parseInt(id),
       );
     }
     return initProduct;
   });
-  function modifiedProduct(event) {
+  async function modifiedProduct(event) {
     event.preventDefault();
+    setLoading(true);
     const formData = new FormData(event.target);
-    const updateProduct = {
+    const updateProductData = {
       ...product,
       name: formData.get("name"),
       description: formData.get("description"),
       category: formData.get("category"),
       price: formData.get("price"),
       stock: formData.get("stock"),
+      image: product.image,
     };
-    setProduct(updateProduct);
-    const copylist = productList.map((p) => {
-      if (p.id_product === updateProduct.id_product) {
-        return updateProduct;
-      }
-      return p;
-    });
-    setproductList(copylist);
-    setmodified(!modified);
+    try {
+      await updateProduct(product.id_product, updateProductData, user.token);
+      const newProductState = { ...product, ...updateProductData };
+      setProduct(newProductState);
+      const copylist = productList.map((p) => {
+        if (p.id_product === product.id_product) {
+          return newProductState;
+        }
+        return p;
+      });
+      setproductList(copylist);
+      toast.success("Producto actualizado correctamente");
+      setmodified(false);
+    } catch (error) {
+      console.error(error);
+      toast.error("Error al actualizar. Verifica tus permisos.");
+    } finally {
+      setLoading(false);
+    }
   }
   function formProduct() {
     return (
@@ -95,7 +110,12 @@ export default function CardProduct(props) {
               placeholder="Stock"
             />
           </div>
-          <button type="submit">Guardar</button>
+          <button type="submit" disabled={loading}>
+            {loading ? "Guardando..." : "Guardar"}
+          </button>
+          <button type="button" onClick={onClickModified}>
+            Cancelar
+          </button>
         </form>
       </div>
     );
