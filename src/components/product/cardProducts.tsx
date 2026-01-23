@@ -7,6 +7,8 @@ import SearchCategory from "./searchCategory";
 import { useUser } from "../../context/userContext";
 import { useProductList } from "../../context/productListContext";
 import { useProductFilter } from "../../context/productFilterContext";
+import { deleteProduct } from "../../services/productService";
+import toast from "react-hot-toast";
 export default function CardProducts() {
   const { productList, setproductList, loading } = useProductList();
   const [page, setpage] = useState(1);
@@ -44,7 +46,24 @@ export default function CardProducts() {
     setpage(1);
     setproductfilter(result);
   }
-
+  const handleDeleteProduct = async (idToDelete) => {
+    if (
+      !window.confirm(
+        "¿Estás seguro de que deseas eliminar este producto permanentemente?",
+      )
+    ) {
+      return;
+    }
+    try {
+      await deleteProduct(idToDelete, user.token);
+      const newList = productList.filter((p) => p.id_product !== idToDelete);
+      setproductList(newList);
+      toast.success("Producto eliminado correctamente");
+    } catch (error) {
+      console.error(error);
+      toast.error("Error al eliminar. Verifica que seas vendedor.");
+    }
+  };
   return (
     <>
       <SearchCategory
@@ -76,9 +95,17 @@ export default function CardProducts() {
               >
                 <div className="Card-Images">
                   <img
-                    src={product.image}
+                    src={
+                      product.image ||
+                      "https://via.placeholder.com/150?text=Sin+Imagen"
+                    }
                     alt={product.name}
                     className="Image-product"
+                    onError={(e) => {
+                      e.target.onerror = null;
+                      e.target.src =
+                        "https://via.placeholder.com/150?text=Sin+Imagen";
+                    }}
                   />
                 </div>
                 <div className="Card-Names">
@@ -99,13 +126,7 @@ export default function CardProducts() {
                   {user.rol == "vendedor" && (
                     /* al ser admin podes eliminar */ <button
                       className="Delete-Button"
-                      onClick={() => {
-                        setproductList((prevlist) =>
-                          prevlist.filter(
-                            (p) => p.id_product !== product.id_product
-                          )
-                        );
-                      }}
+                      onClick={() => handleDeleteProduct(product.id_product)}
                     >
                       X
                     </button>
