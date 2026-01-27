@@ -15,7 +15,10 @@ export const getAllProducts = async () => {
 export const createProduct = async (productData: any, token: string) => {
   try {
     const response = await axios.post(`${API_URL}/products`, productData, {
-      headers: { Authorization: `Bearer ${token}` },
+      headers: {
+        Authorization: `Bearer ${token}`,
+        "Content-Type": "multipart/form-data",
+      },
     });
     return response.data;
   } catch (error) {
