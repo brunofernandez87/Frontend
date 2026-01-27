@@ -1,7 +1,3 @@
-/* ================================================= */
-/* 1. CONTENEDOR PRINCIPAL Y FILTROS */
-/* ================================================= */
-
 .user-list-page {
   color: #ffffff;
   padding: 30px 20px;
@@ -13,7 +9,6 @@
   width: 100%;
 }
 
-/* Ancho máximo uniforme para todos los elementos principales */
 .user-list-page > div:nth-child(1),
 .user-list-page > div:nth-child(2),
 .user-list-page .user-card-wrapper,
@@ -28,25 +23,17 @@
   gap: 15px;
 }
 
-/* ================================================= */
-/* 2. ESTILOS DE LA TARJETA DE USUARIO INDIVIDUAL */
-/* ================================================= */
-
 .user-card-item {
   background-color: #2a2a2a;
   border-radius: 12px;
-  /* ✅ AJUSTE CLAVE: Aumentamos el padding vertical para más espacio arriba y abajo */
-  padding: 25px 25px;
+  padding: 20px 25px;
   box-shadow: 0 6px 12px rgba(0, 0, 0, 0.5);
-  transition: box-shadow 0.2s ease, transform 0.2s ease;
+  transition: all 0.2s ease;
   width: 100%;
-
-  /* Estructura Grid: Avatar | Info | Rol | Botón */
-  grid-template-columns: 120px 4fr 1.5fr 40px;
-  gap: 30px;
-  /* ✅ AJUSTE CLAVE: Alineación de los ítems en el centro de la fila del Grid */
-  align-items: center;
   display: grid;
+  grid-template-columns: 110px 4fr 1.5fr 45px;
+  gap: 25px;
+  align-items: center;
 }
 
 .user-card-item:hover {
@@ -54,17 +41,6 @@
   transform: scale(1.005);
 }
 
-/* --- Bloque 1: Imagen de Perfil --- */
-.Image-Profile {
-  grid-column: 1 / 2;
-  flex-shrink: 0;
-  /* ✅ AJUSTE CLAVE: Centra la imagen dentro de su celda del grid */
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  /* Aseguramos que no haya márgenes externos que afecten el espaciado */
-  margin: 0;
-}
 .Image-Profile img {
   width: 90px;
   height: 90px;
@@ -73,105 +49,101 @@
   border: 3px solid #ffd700;
 }
 
-/* --- Bloque 2: Información Principal (user-info-group) --- */
-.user-info-group {
-  grid-column: 2 / 3;
+.user-role-section {
   display: flex;
   flex-direction: column;
-  gap: 5px;
-  flex-grow: 1;
-  min-width: 250px;
+  align-items: center;
+  gap: 10px;
+  min-width: 140px;
 }
 
-.user-name-username {
-  display: flex;
-  flex-direction: column;
-  gap: 0px;
-  margin-bottom: 5px;
-}
-.user-card-item p {
-  margin: 0;
-  font-size: 0.95em;
-  color: #cccccc;
-  white-space: nowrap;
-  overflow: hidden;
-  text-overflow: ellipsis;
-}
-.user-card-item p strong {
-  color: #ffffff;
-  font-weight: 700;
-}
-.user-info-group .Email-Profile p {
-  color: #aaaaaa;
-  font-size: 0.85em;
-}
-
-/* --- Bloque 3: Rol --- */
-.user-role {
-  grid-column: 3 / 4;
-  text-align: center;
-  flex-shrink: 0;
-}
-.user-role p {
-  color: #ffd700;
-  font-weight: bold;
+.role-badge {
+  color: #ffd700 !important;
   background-color: #383838;
-  padding: 4px 8px;
+  padding: 6px 12px;
+  border-radius: 4px;
+  font-weight: bold;
+  width: 100%;
+  text-align: center;
+  box-sizing: border-box;
+}
+
+.change-role-btn,
+.cancel-edit-btn {
+  background-color: transparent !important;
+  border: 1px solid #ffd700 !important;
+  color: #ffd700 !important;
+  padding: 6px 10px !important;
+  font-size: 0.75em !important;
+  font-weight: bold !important;
+  text-transform: uppercase;
+  width: 100% !important;
+  cursor: pointer;
+  transition: all 0.3s ease !important;
   border-radius: 4px;
 }
 
-/* --- Bloque 4: Botón de Eliminación --- */
-.user-card-item button {
-  grid-column: 4 / 5;
+.change-role-btn:hover {
+  background-color: #ffd700 !important;
+  color: #222222 !important;
+}
+
+.role-edit-container {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  width: 100%;
+}
+
+.role-select-compact {
+  background-color: #333;
+  color: white;
+  border: 1px solid #ffd700;
+  padding: 8px;
+  border-radius: 4px;
+  width: 100%;
+  outline: none;
+  cursor: pointer;
+}
+
+.cancel-edit-btn {
+  border-color: #e74c3c !important; 
+  color: #e74c3c !important;
+}
+
+.cancel-edit-btn:hover {
+  background-color: #e74c3c !important;
+  color: white !important;
+}
+
+.delete-user-btn {
   background-color: #e74c3c;
   color: white;
   width: 35px;
   height: 35px;
   border-radius: 6px;
-  font-size: 1.2em;
+  border: none;
+  font-size: 1.1em;
   font-weight: bold;
   cursor: pointer;
-  flex-shrink: 0;
   display: flex;
   align-items: center;
   justify-content: center;
 }
 
-/* ================================================= */
-/* 3. PAGINACIÓN Y RESPONSIVE */
-/* ================================================= */
-
-.pagination-container {
-  display: flex;
-  justify-content: center;
-  gap: 20px;
-  margin-top: 20px;
+.pagination-container button {
+  background-color: transparent;
+  border: 1px solid #ffd700;
+  color: #ffd700;
+  padding: 8px 16px;
+  border-radius: 4px;
+  cursor: pointer;
 }
 
-@media (max-width: 700px) {
+@media (max-width: 800px) {
   .user-card-item {
     grid-template-columns: 1fr;
-    padding: 20px 15px;
-  }
-
-  .Image-Profile {
-    order: -1;
-    margin: 0 auto 10px auto;
-  }
-
-  .user-info-group,
-  .user-name-username {
-    width: 100%;
     text-align: center;
-    align-items: center;
-  }
-
-  .user-role,
-  .user-card-item button {
-    grid-column: 1 / -1;
-    width: 100%;
-    max-width: 200px;
-    margin: 5px auto;
-    text-align: center;
+    padding: 25px;
   }
 }
