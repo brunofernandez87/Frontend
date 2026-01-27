@@ -1,15 +1,17 @@
 .header-main {
   background-color: #222222;
-  padding: 10px 20px;
+
+  padding: 15px max(20px, calc((100% - 1000px) / 2));
 
   display: flex;
   justify-content: space-between;
   align-items: center;
-
   border-bottom: 2px solid #ffe100;
-  color: #ffffff; 
+  width: 100%;
+  box-sizing: border-box;
+  color: #fff;
   font-family: Arial, sans-serif;
-  gap: 20px;
+  gap: 50px;
 }
 
 .Logo {
@@ -24,87 +26,48 @@
 .Nav-header {
   display: flex;
   flex-wrap: wrap;
-  justify-content: center;
-  gap: 10px;
   align-items: center;
-  max-width: 800px; 
-  width: 100%;
-  margin: 0 auto; 
+  gap: 15px;
+  justify-content: flex-end; 
   flex-grow: 1;
 }
 
-.Nav-header a:not(:has(button)) {
+.Nav-header a:not(:has(button)),
+.Nav-header button {
   text-decoration: none;
   background-color: #ffd700;
-  color: #222222; 
-  padding: 8px 12px;
+  color: #222;
+  padding: 8px 15px;
   font-size: 0.9em;
-  font-weight: 500;
-  border: 1px solid #c2a800; 
+  font-weight: 600;
+  border: 1px solid #c2a800;
   border-radius: 4px;
-  transition: background-color 0.2s ease, border-color 0.2s ease,
-    color 0.2s ease;
-  display: flex;
-  align-items: center;
-}
-
-.Nav-header button {
-  background-color: #ffd700;
-  color: #222222; 
-  border: 1px solid #c2a800; 
-  padding: 8px 12px;
-  border-radius: 4px;
-  cursor: pointer;
-  font-size: 0.9em;
-  font-weight: 500;
-  transition: background-color 0.2s ease, color 0.2s ease,
-    border-color 0.2s ease;
   display: flex;
   align-items: center;
   justify-content: center;
+  transition: all 0.2s ease;
+  cursor: pointer;
 }
 
-/* Estilo para el icono del carrito */
 .Nav-header button svg {
   font-size: 1.1em;
 }
 
 .Nav-header button:hover,
 .Nav-header a:not(:has(button)):hover {
-  background-color: #e6c200;
-  color: #222222;
-  border-color: #e6c200;
-  outline: none;
-}
-
-.Nav-header button:focus,
-.Nav-header a:not(:has(button)):focus {
-  /* Devuelve el elemento al estilo normal después de ser presionado */
-  background-color: #ffd700; /* Mantiene el amarillo */
-  color: #222222;
-  border-color: #c2a800;
-  outline: none;
+  background-color: #fff;
+  border-color: #fff;
+  transform: translateY(-1px);
 }
 
 @media (max-width: 900px) {
   .header-main {
     flex-direction: column;
-    align-items: center;
-    padding: 15px 10px;
+    gap: 15px;
+    padding: 15px 10px; 
   }
-
   .Nav-header {
+    justify-content: center;
     width: 100%;
-    max-width: none;
-    justify-content: space-around;
-    margin-top: 10px;
-    margin-left: 0;
-    margin-right: 0;
-  }
-  .Nav-header button,
-  .Nav-header a:not(:has(button)) {
-    flex-grow: 1;
-    min-width: 120px;
-    text-align: center;
   }
 }

@@ -1,149 +1,246 @@
-.user-list-page {
-  color: #ffffff;
-  padding: 30px 20px;
-  font-family: Arial, sans-serif;
+.users-page-container {
+  padding: 40px 20px;
   display: flex;
   flex-direction: column;
   align-items: center;
-  gap: 20px;
+  gap: 30px;
   width: 100%;
+  min-height: 80vh;
+  box-sizing: border-box;
+  color: #ffffff;
+  font-family: Arial, sans-serif;
 }
 
-.user-list-page > div:nth-child(1),
-.user-list-page > div:nth-child(2),
-.user-list-page .user-card-wrapper,
+.users-page-container > div:first-child, /* Filtros */
+.user-card-wrapper,
 .pagination-container {
   width: 100%;
-  max-width: 900px;
+  max-width: 1000px;
+}
+
+.filters-wrapper {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 15px;
+  align-items: flex-end;
+  background-color: #222222;
+  padding: 20px;
+  border-radius: 8px;
+  border-bottom: 2px solid #333;
 }
 
 .user-card-wrapper {
   display: flex;
   flex-direction: column;
+  gap: 20px;
+}
+
+.user-card {
+  background-color: #222222;
+  border-radius: 8px;
+  display: flex;
+  justify-content: space-between;
+  overflow: hidden;
+  position: relative;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
+  border: 1px solid #333;
+  transition: transform 0.2s ease;
+}
+
+.user-card::before {
+  content: "";
+  position: absolute;
+  left: 0;
+  top: 0;
+  bottom: 0;
+  width: 5px;
+  background-color: #ffd700;
+}
+
+.user-card:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.5);
+  border-color: #555;
+}
+
+.user-details-content {
+  flex-grow: 1;
+  padding: 20px 20px 20px 35px;
+  display: flex;
+  flex-direction: column;
   gap: 15px;
 }
 
-.user-card-item {
-  background-color: #2a2a2a;
-  border-radius: 12px;
-  padding: 20px 25px;
-  box-shadow: 0 6px 12px rgba(0, 0, 0, 0.5);
-  transition: all 0.2s ease;
-  width: 100%;
-  display: grid;
-  grid-template-columns: 110px 4fr 1.5fr 45px;
-  gap: 25px;
-  align-items: center;
-}
-
-.user-card-item:hover {
-  box-shadow: 0 0 20px rgba(255, 215, 0, 0.4);
-  transform: scale(1.005);
-}
-
-.Image-Profile img {
-  width: 90px;
-  height: 90px;
-  object-fit: cover;
-  border-radius: 50%;
-  border: 3px solid #ffd700;
-}
-
-.user-role-section {
+.card-header {
   display: flex;
-  flex-direction: column;
   align-items: center;
-  gap: 10px;
-  min-width: 140px;
+  border-bottom: 1px solid #333;
+  padding-bottom: 10px;
+  margin-bottom: 5px;
 }
 
 .role-badge {
-  color: #ffd700 !important;
-  background-color: #383838;
-  padding: 6px 12px;
-  border-radius: 4px;
-  font-weight: bold;
-  width: 100%;
-  text-align: center;
-  box-sizing: border-box;
-}
-
-.change-role-btn,
-.cancel-edit-btn {
-  background-color: transparent !important;
-  border: 1px solid #ffd700 !important;
-  color: #ffd700 !important;
-  padding: 6px 10px !important;
-  font-size: 0.75em !important;
-  font-weight: bold !important;
+  background-color: #ffd700;
+  color: #222;
+  font-weight: 800;
+  font-size: 0.8rem;
   text-transform: uppercase;
-  width: 100% !important;
-  cursor: pointer;
-  transition: all 0.3s ease !important;
+  padding: 4px 10px;
   border-radius: 4px;
 }
 
-.change-role-btn:hover {
-  background-color: #ffd700 !important;
-  color: #222222 !important;
+.card-body {
+  display: flex;
+  align-items: center;
+  gap: 20px;
 }
 
-.role-edit-container {
+.user-avatar {
+  width: 70px;
+  height: 70px;
+  border-radius: 50%;
+  object-fit: cover;
+  border: 2px solid #ffd700;
+}
+
+.user-text-info {
+  display: flex;
+  flex-direction: column;
+  gap: 3px;
+}
+
+.user-name {
+  font-size: 1.1rem;
+  font-weight: bold;
+  color: #fff;
+  margin: 0;
+}
+
+.user-username {
+  color: #ffd700;
+  font-size: 0.95rem;
+  margin: 0;
+}
+
+.user-email {
+  color: #999;
+  font-size: 0.9rem;
+  margin: 0;
+}
+
+.admin-actions-container {
+  width: 200px;
+  background-color: #2a2a2a;
+  border-left: 1px solid #333;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  padding: 20px;
+  gap: 10px;
+}
+
+/* Botones estilo Order */
+.modify-state-btn {
+  background: transparent;
+  border: 1px solid #ffd700;
+  color: #ffd700;
+  padding: 8px;
+  border-radius: 4px;
+  cursor: pointer;
+  font-weight: bold;
+  text-transform: uppercase;
+  font-size: 0.75rem;
+  transition: 0.2s;
+}
+.modify-state-btn:hover {
+  background: #ffd700;
+  color: #222;
+}
+
+.cancel-order-btn {
+  background: transparent;
+  border: 1px solid #e74c3c;
+  color: #e74c3c;
+  padding: 8px;
+  border-radius: 4px;
+  cursor: pointer;
+  font-weight: bold;
+  text-transform: uppercase;
+  font-size: 0.75rem;
+  transition: 0.2s;
+}
+.cancel-order-btn:hover {
+  background: #e74c3c;
+  color: #fff;
+}
+
+/* Modo Edición */
+.admin-edit-wrapper {
   display: flex;
   flex-direction: column;
   gap: 8px;
-  width: 100%;
 }
 
-.role-select-compact {
-  background-color: #333;
-  color: white;
+.status-select-edit {
+  padding: 6px;
+  background: #1a1a1a;
+  color: #fff;
   border: 1px solid #ffd700;
-  padding: 8px;
   border-radius: 4px;
-  width: 100%;
-  outline: none;
-  cursor: pointer;
 }
 
-.cancel-edit-btn {
-  border-color: #e74c3c !important; 
-  color: #e74c3c !important;
-}
-
-.cancel-edit-btn:hover {
-  background-color: #e74c3c !important;
-  color: white !important;
-}
-
-.delete-user-btn {
-  background-color: #e74c3c;
-  color: white;
-  width: 35px;
-  height: 35px;
-  border-radius: 6px;
+.cancel-modify-btn {
+  background: transparent;
   border: none;
-  font-size: 1.1em;
-  font-weight: bold;
+  color: #999;
   cursor: pointer;
-  display: flex;
-  align-items: center;
-  justify-content: center;
+  font-size: 0.8rem;
+  text-decoration: underline;
+}
+.cancel-modify-btn:hover {
+  color: #fff;
 }
 
+.pagination-container {
+  display: flex;
+  justify-content: center;
+  gap: 15px;
+}
 .pagination-container button {
-  background-color: transparent;
+  background: transparent;
   border: 1px solid #ffd700;
   color: #ffd700;
-  padding: 8px 16px;
+  padding: 8px 20px;
   border-radius: 4px;
   cursor: pointer;
 }
 
-@media (max-width: 800px) {
-  .user-card-item {
-    grid-template-columns: 1fr;
-    text-align: center;
-    padding: 25px;
+@media (max-width: 768px) {
+  .user-card {
+    flex-direction: column;
+  }
+  .user-card::before {
+    width: 100%;
+    height: 4px;
+    bottom: auto;
+  }
+  .user-details-content {
+    padding: 25px 20px;
+  }
+  .card-body {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  .admin-actions-container {
+    width: 100%;
+    border-left: none;
+    border-top: 1px solid #333;
+    flex-direction: row;
+    box-sizing: border-box;
+  }
+  .modify-state-btn,
+  .cancel-order-btn {
+    flex: 1;
   }
 }

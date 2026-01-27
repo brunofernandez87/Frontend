@@ -93,97 +93,89 @@ export default function Users() {
 
   if (loading)
     return (
-      <div className="user-list-page">
+      <div className="users-page-container">
         <h2>Cargando usuarios...</h2>
       </div>
     );
 
   return (
-    <div className="user-list-page">
-      <SearchCategory
-        productFilt={userList}
-        setproductfilter={setuserListFilter}
-        category="name"
-        label="Buscar Usuario"
-      />
-      <FilterCategory
-        products={userList}
-        category="rol"
-        filter={filterUser}
-        label="ordenar por"
-      />
+    <div className="users-page-container">
+      <div className="filters-wrapper">
+        <SearchCategory
+          productFilt={userList}
+          setproductfilter={setuserListFilter}
+          category="name"
+          label="Buscar Usuario"
+        />
+        <FilterCategory
+          products={userList}
+          category="rol"
+          filter={filterUser}
+          label="Filtrar por Rol"
+        />
+      </div>
 
       <div className="user-card-wrapper">
         {users.map((u) => {
           const isEditing = editUserId === u.id_user;
           return (
-            <div key={u.id_user} className="user-card-item">
-              <div className="Image-Profile">
-                <img src={u.image} alt="Profile" />
-              </div>
-
-              <div className="user-info-group">
-                <div className="user-name-username">
-                  <p>
-                    Nombre: <strong>{u.name}</strong>
-                  </p>
-                  <p>
-                    Username: <strong>{u.username}</strong>
-                  </p>
+            <div key={u.id_user} className="user-card">
+              <div className="user-details-content">
+                <div className="card-header">
+                  <span className="role-badge">Rol: {u.rol}</span>
                 </div>
-                <div className="Email-Profile">
-                  <p>
-                    Email: <strong>{u.email}</strong>
-                  </p>
+
+                <div className="card-body">
+                  <img src={u.image} alt="Profile" className="user-avatar" />
+                  <div className="user-text-info">
+                    <p className="user-name">{u.name}</p>
+                    <p className="user-username">@{u.username}</p>
+                    <p className="user-email">{u.email}</p>
+                  </div>
                 </div>
               </div>
 
-              <div className="user-role-section">
+              <div className="admin-actions-container">
                 {isEditing ? (
-                  <div className="role-edit-container">
+                  <div className="admin-edit-wrapper">
                     <select
                       value={u.rol}
                       onChange={(e) =>
                         handleModifyRole(u.id_user, e.target.value)
                       }
-                      className="role-select-compact"
+                      className="status-select-edit"
                       autoFocus
                     >
                       <option value="cliente">Cliente</option>
                       <option value="vendedor">Vendedor</option>
                     </select>
                     <button
-                      className="cancel-edit-btn"
+                      className="cancel-modify-btn"
                       onClick={() => setEditUserId(null)}
                     >
-                      CANCELAR
+                      Cancelar
                     </button>
                   </div>
                 ) : (
                   <>
-                    <p className="role-badge">
-                      Rol: <strong>{u.rol}</strong>
-                    </p>
                     {u.id_user !== user.id_user && (
                       <button
-                        className="change-role-btn"
+                        className="modify-state-btn"
                         onClick={() => setEditUserId(u.id_user)}
                       >
                         Cambiar Rol
                       </button>
                     )}
-                  </>
-                )}
-              </div>
 
-              <div className="delete-action-container">
-                {u.rol === "cliente" && !isEditing && (
-                  <button
-                    className="delete-user-btn"
-                    onClick={() => handleDeleteUser(u.id_user)}
-                  >
-                    X
-                  </button>
+                    {u.rol === "cliente" && (
+                      <button
+                        className="cancel-order-btn"
+                        onClick={() => handleDeleteUser(u.id_user)}
+                      >
+                        Eliminar Usuario
+                      </button>
+                    )}
+                  </>
                 )}
               </div>
             </div>
@@ -194,12 +186,12 @@ export default function Users() {
       <div className="pagination-container">
         {page > 1 && (
           <button className="Next-Page" onClick={handleClickPrevious}>
-            Pagina anterior
+            Página anterior
           </button>
         )}
         {limit < userListFilter.length && (
           <button className="Previous-Page" onClick={handleClickNext}>
-            Pagina siguiente
+            Página siguiente
           </button>
         )}
       </div>
