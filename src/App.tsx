@@ -7,7 +7,6 @@ import { CartProvider } from "./context/cartContext";
 import { ProductListProvider } from "./context/productListContext";
 import { UserListProvider } from "./context/userListContext";
 import OrderListProvider from "./context/orderListContext";
-import OrderDetailListProvider from "./context/orderDetailListContext";
 import { ProductFilterProvider } from "./context/productFilterContext";
 import { UserListFilterProvider } from "./context/userListFilterContext";
 import { ReportListProvider } from "./context/reportListContext";
@@ -26,9 +25,7 @@ function App() {
                     <OrderListFilterProvider>
                       <Header />
                       <CartProvider>
-                        <OrderDetailListProvider>
-                          <Routs />
-                        </OrderDetailListProvider>
+                        <Routs />
                       </CartProvider>
                     </OrderListFilterProvider>
                   </OrderListProvider>

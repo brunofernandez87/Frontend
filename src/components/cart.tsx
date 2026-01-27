@@ -1,47 +1,74 @@
-import { useMemo } from "react";
+import { useMemo, useState } from "react";
 import { useCart } from "../context/cartContext";
 import { toast } from "react-hot-toast";
-import createOrder from "./order/createOrder";
 import "../styles/cart.css";
 import { useUser } from "../context/userContext";
 import { useOrderList } from "../context/orderListContext";
-import { useOrderDetailList } from "../context/orderDetailListContext";
+// import { useOrderDetailList } from "../context/orderDetailListContext";
+import { createDetail } from "../services/orderDetailService";
+import { createOrder } from "../services/orderService";
 const getProductImage = (product) => product.image;
 export default function Cart() {
-  const { setorderDetailList } = useOrderDetailList();
+  const [loading, setLoading] = useState(false);
+  // const { setorderDetailList } = useOrderDetailList();
   const { user } = useUser();
-  const { allOrders, setorderList } = useOrderList();
+  const { setorderList } = useOrderList();
   const { cartContent, setcartContent, updateQuantity } = useCart(); // Calcula el total a pagar
   const total = useMemo(() => {
     return cartContent.reduce(
       // Suma el precio por la cantidad
       (sum, product) => sum + product.price * (product.quantity || 1),
-      0
+      0,
     );
   }, [cartContent]);
   const isCartEmpty = cartContent.length === 0;
-  function handleBuy() {
+  async function handleBuy() {
     if (!user) {
       toast.error("Requiere iniciar sesion para comprar");
       return;
     }
-    const orderID = createOrder({ allOrders, setorderList, user, total });
-    if (orderID) {
-      const neworderDetail = cartContent.map((prod, index) => {
-        const id = cartContent.length + index + 1;
-        return {
-          id_detail: id,
-          id_order: orderID,
-          id_product: prod.id_product,
-          amount: prod.quantity || 1,
-          unit_price: prod.price,
-        };
-      });
-      setorderDetailList((prevList) => [...prevList, ...neworderDetail]);
-      toast.success("Productos Comprados"); // Muestra una notificación
-      setcartContent([]); // Vacía el carrito despues de la compra
-    } else {
-      toast.error("No se pudo procesar la compra");
+    setLoading(true);
+    try {
+      const userId = user.id_user || user.id;
+      if (!userId) {
+        console.error("ERROR CRÍTICO: El usuario no tiene ID", user);
+        toast.error("Error con tu sesión. Por favor sal y vuelve a entrar.");
+        return;
+      }
+      const orderData = {
+        id_user: userId,
+        date: new Date().toISOString().slice(0, 10),
+        total: total,
+        state: "en preparacion",
+      };
+      console.log("INTENTANDO COMPRAR CON ESTOS DATOS:", orderData);
+      console.log("EL USUARIO ACTUAL ES:", user);
+      const createdOrder = await createOrder(orderData);
+      const orderId = createdOrder.result
+        ? createdOrder.result.id_order
+        : createdOrder.id_order;
+      if (!orderId) throw new Error("No se recibió ID de la orden");
+      if (orderId) {
+        const detailPromises = cartContent.map((prod) => {
+          return createDetail({
+            id_order: orderId,
+            id_product: prod.id_product,
+            amount: prod.quantity || 1,
+            unit_price: prod.price,
+          });
+        });
+        await Promise.all(detailPromises);
+        toast.success("Productos Comprados"); // Muestra una notificación
+        setorderList((prevList) => [...prevList, createdOrder.result]);
+        setcartContent([]); // Vacía el carrito despues de la compra
+      } else {
+        toast.error("No se pudo procesar la compra");
+      }
+    } catch (error) {
+      console.error(error);
+      toast.error("Error al procesar la compra. Intenta nuevamente.");
+    } finally {
+      setLoading(false);
     }
   }
 
@@ -70,7 +97,7 @@ export default function Cart() {
                     onClick={() =>
                       updateQuantity(
                         product.id_product,
-                        (product.quantity || 1) - 1
+                        (product.quantity || 1) - 1,
                       )
                     }
                     className="qty-btn remove-btn"
@@ -82,7 +109,7 @@ export default function Cart() {
                     onClick={() =>
                       updateQuantity(
                         product.id_product,
-                        (product.quantity || 1) + 1
+                        (product.quantity || 1) + 1,
                       )
                     }
                     className="qty-btn add-btn"
@@ -101,7 +128,11 @@ export default function Cart() {
               <span>Total a Pagar:</span>
               <span className="total-value">${total.toFixed(2)}</span>
             </div>
-            <button onClick={handleBuy} className="buy-button">
+            <button
+              onClick={handleBuy}
+              className="buy-button"
+              disabled={loading}
+            >
               Comprar Todo
             </button>
           </div>

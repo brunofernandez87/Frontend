@@ -1,8 +1,7 @@
 import { createContext, useContext, useState } from "react";
-import userListMock from "../mock/userMock.json";
 const userListContext = createContext(null);
 export function UserListProvider({ children }) {
-  const [userList, setuserList] = useState(userListMock);
+  const [userList, setuserList] = useState([]);
   return (
     <userListContext.Provider value={{ userList, setuserList }}>
       {children}

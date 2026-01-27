@@ -1,33 +1,36 @@
 import { useState } from "react";
-import { useUserList } from "../../context/userListContext";
 import "../../styles/user/register.css";
 import { useNavigate } from "react-router-dom";
+import { registerUser } from "../../services/userService";
+import toast from "react-hot-toast";
 export default function Register() {
-  const { userList, setuserList } = useUserList();
   const [email, setemail] = useState("");
+  const [loading, setloading] = useState(false);
   const navigate = useNavigate();
-  const handleSubmit = (event) => {
+  const handleSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
-    const formData = new FormData(event.target);
-    const user = userList.find((u) => u.email === email);
-    const image = URL.createObjectURL(formData.get("image"));
-    if (user) {
-      alert("El email ya esta en uso");
-    } else {
-      const date = new Date();
-      const newUser = {
-        id_user: userList.length + 1,
-        email: formData.get("email"),
-        password_hash: formData.get("password_hash"),
-        rol: "cliente",
-        create: date,
-        name: formData.get("name"),
-        image: image,
-        username: formData.get("username"),
-      };
-      setuserList([...userList, newUser]);
-      alert("Usuario Registrado");
+    setloading(true);
+    const formData = new FormData(event.currentTarget);
+    // const image = URL.createObjectURL(formData.get("image"));
+    const name = formData.get("name") as string;
+    const username = formData.get("username") as string;
+    const emailInput = formData.get("email") as string;
+    const password = formData.get("password_hash") as string;
+    try {
+      await registerUser(username, emailInput, password, name);
+      toast.success("¡Usuario registrado con éxito!");
       navigate("/login");
+    } catch (error: any) {
+      console.error(error);
+      if (error.response && error.response.data) {
+        toast.error(
+          error.response.data.message || "Error al registrar usuario",
+        );
+      } else {
+        toast.error("Ocurrió un error. Inténtalo más tarde.");
+      }
+    } finally {
+      setloading(false);
     }
   };
   return (
@@ -70,7 +73,9 @@ export default function Register() {
           placeholder="************"
           className="input-register"
         />
-        <button type="submit">Registrarse</button>
+        <button type="submit">
+          {loading ? "Registrando..." : "Registrarse"}
+        </button>
       </form>
     </div>
   );

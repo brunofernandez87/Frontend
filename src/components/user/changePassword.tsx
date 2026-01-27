@@ -2,59 +2,64 @@ import { useState } from "react";
 import "../../styles/user/changePassword.css";
 import { useUser } from "../../context/userContext";
 import { Navigate, useNavigate } from "react-router-dom";
-import { useUserList } from "../../context/userListContext";
+import toast from "react-hot-toast";
+import { changePassword } from "../../services/userService";
+
 export default function ChangePassword() {
-  const { user, setuser } = useUser();
-  const { userList, setuserList } = useUserList();
+  const { user } = useUser();
   const navigate = useNavigate();
   const [newpassword, setnewpassword] = useState("");
   const [repeatpassword, setrepeatpassword] = useState("");
+  const [loading, setLoading] = useState(false);
   const visibility =
     newpassword.trim() !== "" &&
     repeatpassword.trim() !== "" &&
-    newpassword == repeatpassword;
+    newpassword === repeatpassword;
+
   if (!user) {
     const error = "sesion no iniciada";
     return <Navigate to={`/error/${error}`} replace />;
   }
-  const password = user.password_hash;
-  function validator({ actualpassword, newPassword }) {
-    if (actualpassword != password) {
-      alert("La contraseña actual no coincide");
-      return true;
-    }
-    if (newPassword == password) {
-      alert("No se puede tener la misma contraseña");
-      return true;
-    }
-    return false;
-  }
-  function modificatedPassword(event) {
+  async function handleSubmit(event) {
     event.preventDefault();
     const formData = new FormData(event.target);
-    const result = validator({
-      actualpassword: formData.get("password"),
-      newPassword: formData.get("newPassword"),
-    });
-    if (result == false) {
-      const newuser = {
-        ...user,
-        password_hash: formData.get("newPassword"),
-      };
-      setuser(newuser);
-      const copyList = userList.map((u) => {
-        if (u.id_user == newuser.id_user) {
-          return newuser;
-        }
-        return u;
-      });
-      setuserList(copyList);
-      navigate(`/profile/${newuser.username}/${newuser.password_hash}`);
+    const currentPasswordInput = formData.get("password");
+
+    // Validaciones
+    if (newpassword !== repeatpassword) {
+      toast.error("Las nuevas contraseñas no coinciden");
+      return;
+    }
+    if (currentPasswordInput === newpassword) {
+      toast.error("La nueva contraseña no puede ser igual a la actual");
+      return;
+    }
+    setLoading(true);
+    try {
+      await changePassword(
+        user.id_user,
+        currentPasswordInput,
+        newpassword,
+        user.token,
+      );
+      toast.success("¡Contraseña cambiada con éxito!");
+      navigate("/profile");
+    } catch (error: any) {
+      console.error(error);
+      if (error.response && error.response.data) {
+        toast.error(
+          error.response.data.message || "Error al cambiar contraseña",
+        );
+      } else {
+        toast.error("Error de servidor. Intenta más tarde.");
+      }
+    } finally {
+      setLoading(false);
     }
   }
   return (
     <div className="change-password-container">
-      <form onSubmit={modificatedPassword} className="change-password-form">
+      <form onSubmit={handleSubmit} className="change-password-form">
         <label htmlFor="password">Contraseña Actual</label>
         <input type="password" name="password" required />
         <label htmlFor="newPassword">Nueva Contraseña</label>
@@ -74,9 +79,9 @@ export default function ChangePassword() {
         <button
           type="submit"
           className="change-password-button"
-          disabled={!visibility}
+          disabled={!visibility || loading}
         >
-          Cambiar Contraseña
+          {loading ? "Actualizando..." : "Cambiar Contraseña"}
         </button>
       </form>
     </div>

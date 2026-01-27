@@ -83,10 +83,7 @@ export default function Header() {
                 </Link>
               </>
             )}
-            <Link
-              to={`/profile/${user.username}/${user.password_hash}`}
-              title="Perfil"
-            >
+            <Link to={`/profile`} title="Perfil">
               <button>Perfil </button>
             </Link>
           </>
