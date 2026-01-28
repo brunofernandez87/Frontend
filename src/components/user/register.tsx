@@ -11,13 +11,9 @@ export default function Register() {
     event.preventDefault();
     setloading(true);
     const formData = new FormData(event.currentTarget);
-    // const image = URL.createObjectURL(formData.get("image"));
-    const name = formData.get("name") as string;
-    const username = formData.get("username") as string;
-    const emailInput = formData.get("email") as string;
-    const password = formData.get("password_hash") as string;
+    formData.append("rol", "cliente");
     try {
-      await registerUser(username, emailInput, password, name);
+      await registerUser(formData);
       toast.success("¡Usuario registrado con éxito!");
       navigate("/login");
     } catch (error: any) {
