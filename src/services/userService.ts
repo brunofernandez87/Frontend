@@ -12,20 +12,12 @@ export const loginUser = async (email: string, password: string) => {
     throw error;
   }
 };
-export const registerUser = async (
-  username: string,
-  email: string,
-  password: string,
-  name: string,
-) => {
+export const registerUser = async (formData: any) => {
   try {
-    const response = await axios.post(`${API_URL}/users/register`, {
-      username,
-      email,
-      password_hash: password,
-      name,
-      rol: "cliente",
-      image: "",
+    const response = await axios.post(`${API_URL}/users/register`, formData, {
+      headers: {
+        "Content-Type": "multipart/form-data",
+      },
     });
     return response.data;
   } catch (error) {
@@ -76,10 +68,17 @@ export const recoveryPassword = async (email: string) => {
     throw error;
   }
 };
-export const updateUser = async (userId: string, data: any, token: string) => {
+export const updateUser = async (
+  userId: string,
+  data: FormData,
+  token: string,
+) => {
   try {
     const response = await axios.put(`${API_URL}/users/${userId}`, data, {
-      headers: { Authorization: `Bearer ${token}` },
+      headers: {
+        Authorization: `Bearer ${token}`,
+        "Content-Type": "multipart/form-data",
+      },
     });
     return response.data;
   } catch (error) {
