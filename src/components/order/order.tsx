@@ -8,10 +8,12 @@ import SearchCategory from "../product/searchCategory";
 import { eliminateOrder, modifyOrder } from "../../services/orderService";
 import { useUser } from "../../context/userContext";
 import toast from "react-hot-toast";
+import { useUserList } from "../../context/userListContext";
 
 export default function Order() {
   const { orderList, setorderList } = useOrderList();
   const { orderListFilter, setorderListFilter } = useOrderListFilter();
+  const { userList } = useUserList();
   const [page, setpage] = useState(1);
   const { user } = useUser();
   const maxItem = 5;
@@ -35,6 +37,17 @@ export default function Order() {
     setpage(page - 1);
   }
 
+  const getUserName = (id) => {
+    if (!userList || userList.length === 0) return id;
+    const foundUser = userList.find((u) => u.id_user === id);
+    return foundUser ? foundUser.username : id;
+  };
+
+  const ordersForFilter = orderList.map((order) => ({
+    ...order,
+    username: getUserName(order.id_user),
+  }));
+
   function filter(event) {
     const value = event.target.value;
     if (value === "") {
@@ -42,7 +55,7 @@ export default function Order() {
       setpage(1);
       return;
     }
-    const result = orderList.filter((o) => o.id_user == value);
+    const result = orderList.filter((o) => getUserName(o.id_user) === value);
     setpage(1);
     setorderListFilter(result);
   }
@@ -103,10 +116,10 @@ export default function Order() {
       {/* Sección de Filtros */}
       <div className="filters-wrapper">
         <FilterCategory
-          products={orderList}
+          products={ordersForFilter}
           filter={filter}
           label={"Buscar orden de"}
-          category={"id_user"}
+          category={"username"}
         />
         <SearchCategory
           productFilt={orderList}
@@ -131,7 +144,7 @@ export default function Order() {
       <div className="order-card-wrapper">
         {orderFilter.map((o) => {
           const isEditing = editOrderId === o.id_order;
-
+          const usernameDisplay = getUserName(o.id_user);
           return (
             <div key={o.id_order} className="order-card">
               {/* IZQUIERDA: Información Clickable */}
@@ -148,7 +161,7 @@ export default function Order() {
 
                 <div className="card-body">
                   <span className="order-user">
-                    Usuario: <strong>{o?.username || o?.id_user}</strong>
+                    Usuario: <strong>{usernameDisplay}</strong>
                   </span>
                   <span className="order-total-value">$ {o?.total}</span>
                 </div>
