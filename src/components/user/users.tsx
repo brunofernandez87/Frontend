@@ -3,21 +3,16 @@ import { useUserList } from "../../context/userListContext";
 import { useUserListFilter } from "../../context/userListFilterContext";
 import SearchCategory from "../product/searchCategory";
 import FilterCategory from "../filterCategory";
-import {
-  getAllUsers,
-  deleteUserId,
-  updateUser,
-} from "../../services/userService";
+import { deleteUserId, updateUser } from "../../services/userService";
 import { useUser } from "../../context/userContext";
 import "../../styles/user/users.css";
 import toast from "react-hot-toast";
 
 export default function Users() {
-  const { userList, setuserList } = useUserList();
+  const { userList, setuserList, loadingUsers, fetchUsers } = useUserList();
   const { userListFilter, setuserListFilter } = useUserListFilter();
   const { user } = useUser();
   const [page, setpage] = useState(1);
-  const [loading, setLoading] = useState(true);
   const [editUserId, setEditUserId] = useState(null);
 
   const maxUsers = 5;
@@ -61,24 +56,9 @@ export default function Users() {
       toast.error("Error al actualizar el rol");
     }
   };
-
   useEffect(() => {
-    async function fetchUsers() {
-      if (user?.token) {
-        try {
-          const data = await getAllUsers(user.token);
-          setuserList(data);
-          setuserListFilter(data);
-        } catch (error) {
-          toast.error("Error al cargar usuarios");
-        } finally {
-          setLoading(false);
-        }
-      }
-    }
-    fetchUsers();
-  }, [user, setuserList, setuserListFilter]);
-
+    setuserListFilter(userList);
+  }, [userList, setuserListFilter]);
   const users = userListFilter.slice(limitant, limit);
 
   function filterUser(event) {
@@ -91,7 +71,7 @@ export default function Users() {
     setpage(1);
   }
 
-  if (loading)
+  if (loadingUsers)
     return (
       <div className="users-page-container">
         <h2>Cargando usuarios...</h2>
