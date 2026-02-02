@@ -1,63 +1,39 @@
 .footer {
   background-color: #222222;
   color: #ffffff;
-  padding: 25px 20px;
+
+  padding: 30px max(20px, calc((100% - 1000px) / 2));
+
   display: flex;
   flex-direction: column;
-  align-items: flex-start;
-  gap: 20px;
+  gap: 30px;
   font-family: Arial, sans-serif;
   border-top: 2px solid #ffe100;
   width: 100%;
   box-sizing: border-box;
 }
 
-.contact {
-  display: flex;
-  flex-direction: column;
-  gap: 10px;
-}
-
-.contact p b {
-  color: #ffd700;
-  font-size: 1.1em;
-  text-transform: uppercase;
-  margin-bottom: 5px;
-  display: block;
-}
-.contact-info {
-  display: flex;
-  flex-direction: column;
-  gap: 8px;
-}
-
-.social-links {
-  display: flex;
-  flex-direction: column;
-  align-items: flex-start;
-  gap: 10px;
-}
-
+.contact p b,
 .social-links h3 {
   color: #ffd700;
   font-size: 1.1em;
-  margin-bottom: 5px;
   text-transform: uppercase;
+  margin-bottom: 8px;
+  display: block;
 }
 
 .social-link {
   display: flex;
   align-items: center;
-  color: #ffffff;
+  color: #fff;
   text-decoration: none;
-  transition: color 0.3s ease;
   font-size: 1.1em;
+  margin-bottom: 8px;
+  transition: 0.2s;
 }
-
 .social-link:hover {
   color: #ffd700;
 }
-
 .social-icon {
   width: 18px;
   height: 18px;
@@ -66,19 +42,18 @@
 
 .footer > a button {
   background-color: #ffd700;
-  color: #222222;
+  color: #222;
   border: none;
-  padding: 12px 25px;
-  border-radius: 5px;
+  padding: 12px 30px;
+  border-radius: 30px; 
   cursor: pointer;
   font-weight: bold;
   text-transform: uppercase;
-  transition: background-color 0.3s ease, transform 0.1s ease;
+  transition: all 0.3s;
 }
-
 .footer > a button:hover {
-  background-color: #e6c200;
-  transform: translateY(-1px);
+  background-color: #fff;
+  transform: scale(1.05);
 }
 
 @media (min-width: 768px) {
@@ -87,20 +62,14 @@
     justify-content: space-between;
     align-items: flex-start;
   }
-
   .contact,
-  .footer > a,
-  .social-links {
-    flex: 1;
-    max-width: none;
-    padding: 0 15px;
-  }
-
+  .social-links,
   .footer > a {
-    align-self: center;
-    text-align: center;
+    flex: 1;
+  }
+  .footer > a {
     display: flex;
-    justify-content: center;
-    padding: 0;
+    justify-content: flex-end;
+    align-items: center;
   }
 }

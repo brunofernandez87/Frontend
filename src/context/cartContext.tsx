@@ -1,47 +1,67 @@
 import { createContext, useContext, useState } from "react";
+import { toast } from "react-hot-toast";
 
 const cartContext = createContext(null);
 
 export function CartProvider({ children }) {
-  const [cartContent, setcartContent] = useState([]); // Función para agregar un producto al carrito o incrementar su cantidad.
+  const [cartContent, setcartContent] = useState([]);
 
+  // Agrega un producto o incrementa su cantidad validando stock
   const addOrUpdateItem = (productToAdd) => {
-    // Busca si el producto ya existe en el carrito por su ID.
     const existingItemIndex = cartContent.findIndex(
-      (item) => item.id_product === productToAdd.id_product
+      (item) => item.id_product === productToAdd.id_product,
     );
 
     if (existingItemIndex > -1) {
-      // Si existe: Incrementa la cantidad de ese ítem.
+      const currentQuantity = cartContent[existingItemIndex].quantity || 1;
+
+      // Si ya alcanzamos el stock máximo disponible
+      if (currentQuantity >= productToAdd.stock) {
+        toast.error(
+          `Lo sentimos, solo hay ${productToAdd.stock} unidades disponibles.`,
+        );
+        return;
+      }
+
       const newCart = cartContent.map((item, index) => {
         if (index === existingItemIndex) {
-          // Incrementa la cantidad
-          const currentQuantity = item.quantity || 1;
           return { ...item, quantity: currentQuantity + 1 };
         }
         return item;
       });
+
       setcartContent(newCart);
     } else {
+      // Si el producto no tiene stock
+      if (productToAdd.stock <= 0) {
+        toast.error("Este producto no tiene stock disponible.");
+        return;
+      }
+
       const newItem = { ...productToAdd, quantity: 1 };
       setcartContent([...cartContent, newItem]);
+      toast.success("Producto añadido al carrito");
     }
   };
 
-  const updateQuantity = (productId, newQuantity) => {
+  // Actualiza la cantidad desde los botones + y - del carrito
+  const updateQuantity = (productId, newQuantity, maxStock) => {
+    if (newQuantity > maxStock) {
+      toast.error("No puedes superar el stock disponible");
+      return;
+    }
+
     if (newQuantity <= 0) {
-      // Si la cantidad es cero o menos: Eliminar el producto
       setcartContent(
-        cartContent.filter((item) => item.id_product !== productId)
+        cartContent.filter((item) => item.id_product !== productId),
       );
     } else {
-      // Si la cantidad es válida: Actualizar la cantidad
       setcartContent(
         cartContent.map((item) =>
           item.id_product === productId
-            ? { ...item, quantity: newQuantity } // Sobrescribe la cantidad
-            : item
-        )
+            ? { ...item, quantity: newQuantity }
+            : item,
+        ),
       );
     }
   };
@@ -50,9 +70,9 @@ export function CartProvider({ children }) {
     <cartContext.Provider
       value={{
         cartContent,
-        setcartContent, // Para vaciar el carrito completamente
-        addOrUpdateItem, // Función principal para añadir/incrementar
-        updateQuantity, // Función para +/- botones
+        setcartContent,
+        addOrUpdateItem,
+        updateQuantity,
       }}
     >
       {children}
@@ -60,12 +80,9 @@ export function CartProvider({ children }) {
   );
 }
 
-// Para consumir el contextoen otros componentes
 export function useCart() {
   const context = useContext(cartContext);
-  if (!context) {
-    // Lanza un error si el hook no se usa dentro del proveedor
-    throw new Error("useCart debe ser usado dentro de un useCartProvider");
-  }
+  if (!context)
+    throw new Error("useCart debe ser usado dentro de un CartProvider");
   return context;
 }

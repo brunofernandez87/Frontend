@@ -4,69 +4,91 @@ import { toast } from "react-hot-toast";
 import "../styles/cart.css";
 import { useUser } from "../context/userContext";
 import { useOrderList } from "../context/orderListContext";
-// import { useOrderDetailList } from "../context/orderDetailListContext";
+import { useProductList } from "../context/productListContext";
 import { createDetail } from "../services/orderDetailService";
 import { createOrder } from "../services/orderService";
+
 const getProductImage = (product) => product.image;
+
 export default function Cart() {
   const [loading, setLoading] = useState(false);
-  // const { setorderDetailList } = useOrderDetailList();
   const { user } = useUser();
   const { setorderList } = useOrderList();
-  const { cartContent, setcartContent, updateQuantity } = useCart(); // Calcula el total a pagar
+  const { fetchProducts } = useProductList();
+  const { cartContent, setcartContent, updateQuantity } = useCart();
+
   const total = useMemo(() => {
     return cartContent.reduce(
-      // Suma el precio por la cantidad
       (sum, product) => sum + product.price * (product.quantity || 1),
       0,
     );
   }, [cartContent]);
+
   const isCartEmpty = cartContent.length === 0;
+
   async function handleBuy() {
     if (!user) {
       toast.error("Requiere iniciar sesion para comprar");
       return;
     }
+
+    const userId = user.id_user || user.id;
+
+    if (!userId) {
+      console.error("ERROR CRÍTICO: El usuario no tiene ID", user);
+      toast.error("Error con tu sesión. Por favor sal y vuelve a entrar.");
+      return;
+    }
+
     setLoading(true);
+
     try {
-      const userId = user.id_user || user.id;
-      if (!userId) {
-        console.error("ERROR CRÍTICO: El usuario no tiene ID", user);
-        toast.error("Error con tu sesión. Por favor sal y vuelve a entrar.");
-        return;
-      }
       const orderData = {
         id_user: userId,
         date: new Date().toISOString().slice(0, 10),
         total: total,
         state: "en preparacion",
       };
-      console.log("INTENTANDO COMPRAR CON ESTOS DATOS:", orderData);
-      console.log("EL USUARIO ACTUAL ES:", user);
-      const createdOrder = await createOrder(orderData);
-      const orderId = createdOrder.result
-        ? createdOrder.result.id_order
-        : createdOrder.id_order;
+
+      // Crear Orden
+      const createdOrderResponse = await createOrder(orderData);
+
+      // Manejo de respuesta flexible
+      const createdOrder = createdOrderResponse.result || createdOrderResponse;
+      const orderId = createdOrder.id_order;
+
       if (!orderId) throw new Error("No se recibió ID de la orden");
-      if (orderId) {
-        const detailPromises = cartContent.map((prod) => {
-          return createDetail({
-            id_order: orderId,
-            id_product: prod.id_product,
-            amount: prod.quantity || 1,
-            unit_price: prod.price,
-          });
+
+      // Crear Detalles
+      const detailPromises = cartContent.map((prod) => {
+        return createDetail({
+          id_order: orderId,
+          id_product: prod.id_product,
+          amount: prod.quantity || 1,
+          unit_price: prod.price,
         });
-        await Promise.all(detailPromises);
-        toast.success("Productos Comprados"); // Muestra una notificación
-        setorderList((prevList) => [...prevList, createdOrder.result]);
-        setcartContent([]); // Vacía el carrito despues de la compra
-      } else {
-        toast.error("No se pudo procesar la compra");
+      });
+
+      await Promise.all(detailPromises);
+
+      toast.success("¡Compra exitosa! Te enviamos los detalles por correo 📧");
+
+      // Recargar productos para ver stock actualizado
+      if (fetchProducts) {
+        await fetchProducts();
       }
-    } catch (error) {
+
+      setorderList((prevList) => [...prevList, createdOrder]);
+      setcartContent([]);
+    } catch (error: any) {
       console.error(error);
-      toast.error("Error al procesar la compra. Intenta nuevamente.");
+      // Mensaje específico (Stock insuficiente)
+      if (error.response && error.response.data) {
+        const msg = error.response.data.message || error.response.data;
+        toast.error(`Error: ${msg}`);
+      } else {
+        toast.error("Error al procesar la compra.");
+      }
     } finally {
       setLoading(false);
     }
@@ -88,7 +110,7 @@ export default function Cart() {
                   <img
                     src={getProductImage(product)}
                     alt={product.name}
-                    className="item-image" // fijar el tamaño de la imagen.
+                    className="item-image"
                   />
                   <span className="item-name">{product.name}</span>
                 </div>
@@ -98,6 +120,7 @@ export default function Cart() {
                       updateQuantity(
                         product.id_product,
                         (product.quantity || 1) - 1,
+                        product.stock,
                       )
                     }
                     className="qty-btn remove-btn"
@@ -110,6 +133,7 @@ export default function Cart() {
                       updateQuantity(
                         product.id_product,
                         (product.quantity || 1) + 1,
+                        product.stock,
                       )
                     }
                     className="qty-btn add-btn"
@@ -133,7 +157,7 @@ export default function Cart() {
               className="buy-button"
               disabled={loading}
             >
-              Comprar Todo
+              {loading ? "Procesando..." : "Comprar Todo"}
             </button>
           </div>
         </div>

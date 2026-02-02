@@ -16,19 +16,13 @@ export default function ModificateUser() {
     setLoading(true);
     event.preventDefault();
     const formData = new FormData(event.target);
-    const dataToUpdate = {
-      name: formData.get("name"),
-      email: formData.get("email"),
-      username: formData.get("username"),
-      image: user.image,
-    };
     try {
-      const response = await updateUser(user.id_user, dataToUpdate, user.token);
-
+      const response = await updateUser(user.id_user, formData, user.token);
       console.log("Respuesta del server:", response);
+      const userFromBack = response.result;
       const updatedUserContext = {
         ...user,
-        ...dataToUpdate,
+        ...userFromBack,
       };
       setuser(updatedUserContext);
       toast.success("Datos actualizados correctamente");

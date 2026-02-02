@@ -4,6 +4,7 @@ import { useUser } from "../../context/userContext";
 import "../../styles/product/createProduct.css";
 import toast from "react-hot-toast";
 import { createProduct } from "../../services/productService";
+import { useProductList } from "../../context/productListContext";
 
 export default function CreateProduct() {
   const navigate = useNavigate();
@@ -13,6 +14,7 @@ export default function CreateProduct() {
   const [price, setprice] = useState("");
   const [stock, setstock] = useState("");
   const [loading, setLoading] = useState(false);
+  const { fetchProducts } = useProductList();
   const visibility =
     name.trim() !== "" &&
     category.trim() !== "" &&
@@ -26,20 +28,10 @@ export default function CreateProduct() {
     }
     setLoading(true);
     const formData = new FormData(event.target);
-    // const image = URL.createObjectURL(formData.get("image"));
-    const stock = formData.get("stock");
-    const price = formData.get("price");
-    const newProduct = {
-      image: "",
-      name: formData.get("name"),
-      description: formData.get("description"),
-      category: formData.get("category"),
-      price: parseFloat(price),
-      stock: parseInt(stock),
-    };
     try {
-      await createProduct(newProduct, user.token);
+      await createProduct(formData, user.token);
       toast.success("¡Producto Creado Exitosamente!");
+      await fetchProducts();
       navigate("/");
     } catch (error) {
       console.error(error);
