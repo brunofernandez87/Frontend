@@ -30,18 +30,15 @@ export default function CardProduct(props) {
     event.preventDefault();
     setLoading(true);
     const formData = new FormData(event.target);
-    const updateProductData = {
-      ...product,
-      name: formData.get("name"),
-      description: formData.get("description"),
-      category: formData.get("category"),
-      price: formData.get("price"),
-      stock: formData.get("stock"),
-      image: product.image,
-    };
     try {
-      await updateProduct(product.id_product, updateProductData, user.token);
-      const newProductState = { ...product, ...updateProductData };
+      const response = await updateProduct(
+        product.id_product,
+        formData,
+        user.token,
+      );
+      const updatedProductFromBack =
+        response.product || response.result || response;
+      const newProductState = { ...product, ...updatedProductFromBack };
       setProduct(newProductState);
       const copylist = productList.map((p) => {
         if (p.id_product === product.id_product) {
@@ -67,6 +64,10 @@ export default function CardProduct(props) {
             <img src={image} alt={name} />
           </div>
           <div className="Card-Name">
+            <div className="Card-Input-Group">
+              <label>Cambiar Imagen:</label>
+              <input type="file" name="image" accept="image/*" />
+            </div>
             <label>Nombre:</label>
             <input
               type="text"

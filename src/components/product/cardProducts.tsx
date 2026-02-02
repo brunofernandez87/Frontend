@@ -96,8 +96,9 @@ export default function CardProducts() {
                 <div className="Card-Images">
                   <img
                     src={
-                      product.image ||
-                      "https://via.placeholder.com/150?text=Sin+Imagen"
+                      product.image
+                        ? `${product.image}?v=${product.updatedAt || new Date().getTime()}`
+                        : "https://via.placeholder.com/150?text=Sin+Imagen"
                     }
                     alt={product.name}
                     className="Image-product"
