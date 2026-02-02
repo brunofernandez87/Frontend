@@ -4,7 +4,7 @@ import { toast } from "react-hot-toast";
 import "../styles/cart.css";
 import { useUser } from "../context/userContext";
 import { useOrderList } from "../context/orderListContext";
-import { useProductList } from "../context/productListContext"; // Importar esto
+import { useProductList } from "../context/productListContext";
 import { createDetail } from "../services/orderDetailService";
 import { createOrder } from "../services/orderService";
 
@@ -14,7 +14,6 @@ export default function Cart() {
   const [loading, setLoading] = useState(false);
   const { user } = useUser();
   const { setorderList } = useOrderList();
-  // Traemos fetchProducts para recargar stock visualmente
   const { fetchProducts } = useProductList();
   const { cartContent, setcartContent, updateQuantity } = useCart();
 
@@ -33,7 +32,7 @@ export default function Cart() {
       return;
     }
 
-    const userId = user.id_user || user.id; // Doble chequeo
+    const userId = user.id_user || user.id;
 
     if (!userId) {
       console.error("ERROR CRÍTICO: El usuario no tiene ID", user);
@@ -51,7 +50,7 @@ export default function Cart() {
         state: "en preparacion",
       };
 
-      // 1. Crear Orden
+      // Crear Orden
       const createdOrderResponse = await createOrder(orderData);
 
       // Manejo de respuesta flexible
@@ -60,7 +59,7 @@ export default function Cart() {
 
       if (!orderId) throw new Error("No se recibió ID de la orden");
 
-      // 2. Crear Detalles
+      // Crear Detalles
       const detailPromises = cartContent.map((prod) => {
         return createDetail({
           id_order: orderId,
@@ -72,9 +71,9 @@ export default function Cart() {
 
       await Promise.all(detailPromises);
 
-      toast.success("Productos Comprados");
+      toast.success("¡Compra exitosa! Te enviamos los detalles por correo 📧");
 
-      // 3. Recargar productos para ver stock actualizado
+      // Recargar productos para ver stock actualizado
       if (fetchProducts) {
         await fetchProducts();
       }
@@ -83,7 +82,7 @@ export default function Cart() {
       setcartContent([]);
     } catch (error: any) {
       console.error(error);
-      // Mensaje específico del backend (Stock insuficiente)
+      // Mensaje específico (Stock insuficiente)
       if (error.response && error.response.data) {
         const msg = error.response.data.message || error.response.data;
         toast.error(`Error: ${msg}`);
@@ -121,7 +120,7 @@ export default function Cart() {
                       updateQuantity(
                         product.id_product,
                         (product.quantity || 1) - 1,
-                        product.stock, // Pasamos stock
+                        product.stock,
                       )
                     }
                     className="qty-btn remove-btn"
@@ -134,7 +133,7 @@ export default function Cart() {
                       updateQuantity(
                         product.id_product,
                         (product.quantity || 1) + 1,
-                        product.stock, // Pasamos stock
+                        product.stock,
                       )
                     }
                     className="qty-btn add-btn"
