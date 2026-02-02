@@ -21,6 +21,7 @@ Frontend del e-commerce de insumos agrícolas **AgroInsumos**, construido con **
 Basado en la estructura real del repositorio (`branch dev`):
 ```ruby
 C:.
+|   .env
 |   .gitignore
 |   eslint.config.js
 |   index.html
@@ -32,10 +33,10 @@ C:.
 |   tsconfig.json
 |   tsconfig.node.json
 |   vite.config.ts
-|   
+|
 +---public
 |   |   vite.svg
-|   |   
+|   |
 |   \---product_icons
 |           1.jpeg
 |           10.jpeg
@@ -88,7 +89,6 @@ C:.
     |   |       header.tsx
     |   |
     |   +---order
-    |   |       createOrder.tsx
     |   |       order.tsx
     |   |       orderDetail.tsx
     |   |
@@ -100,8 +100,8 @@ C:.
     |   |       selectProduct.tsx
     |   |
     |   +---report
+    |   |       icons.tsx
     |   |       report.tsx
-    |   |       reportsCard.tsx
     |   |
     |   \---user
     |           changePassword.tsx
@@ -114,7 +114,6 @@ C:.
     |
     +---context
     |       cartContext.tsx
-    |       orderDetailListContext.tsx
     |       orderListContext.tsx
     |       orderListFilterContext.tsx
     |       productFilterContext.tsx
@@ -131,6 +130,13 @@ C:.
     |       productMock.json
     |       reportMock.json
     |       userMock.json
+    |
+    +---services
+    |       orderDetailService.ts
+    |       orderService.ts
+    |       productService.ts
+    |       reportService.ts
+    |       userService.ts
     |
     \---styles
         |   aboutUs.css
@@ -155,7 +161,6 @@ C:.
         |
         +---report
         |       report.css
-        |       reportsCard.css
         |
         \---user
                 changePassword.css
