@@ -46,22 +46,22 @@
 
 /* Estilo del campo de texto de consulta */
 .contact-container textarea {
-  resize: vertical; /* Permite redimensionar solo verticalmente */
+  resize: vertical; 
   min-height: 120px;
 }
 
 /* Efecto al enfocar los campos */
 .contact-container input:focus,
 .contact-container textarea:focus {
-  border-color: #ffd700; /* Borde amarillo/dorado al hacer clic */
+  border-color: #ffd700;
   outline: none;
   box-shadow: 0 0 5px rgba(255, 215, 0, 0.5);
 }
 
 /* Estilo del botón */
 .contact-container button {
-  background-color: #ffd700; /* Color de acento amarillo/dorado */
-  color: #222222; /* Texto oscuro */
+  background-color: #ffd700;
+  color: #222222;
   border: none;
   padding: 12px 20px;
   border-radius: 4px;
@@ -75,7 +75,7 @@
 .contact-container button:disabled {
   background-color: #cccccc;
   color: #666666;
-  cursor: not-allowed; /* Muestra el símbolo de "prohibido */
+  cursor: not-allowed;
   transform: none;
   opacity: 0.7;
 }
@@ -84,6 +84,6 @@
 }
 
 .contact-container button:hover {
-  background-color: #e6c200; /* Tono ligeramente más oscuro al pasar el mouse */
-  transform: translateY(-1px); /* Efecto sutil de elevación */
+  background-color: #e6c200;
+  transform: translateY(-1px);
 }

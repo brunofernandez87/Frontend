@@ -1,6 +1,5 @@
 import axios from "axios";
 
-// Quitamos la barra final si existe en el .env
 const API_URL = import.meta.env.VITE_API_URL.replace(/\/$/, "");
 
 export const loginUser = async (email: string, password: string) => {
@@ -15,7 +14,7 @@ export const loginUser = async (email: string, password: string) => {
     throw error;
   }
 };
-// ... EL RESTO DEL ARCHIVO QUEDA IGUAL (registerUser, eliminateUser, etc.)
+
 export const registerUser = async (formData: any) => {
   try {
     const response = await axios.post(`${API_URL}/users/register`, formData, {
@@ -29,7 +28,7 @@ export const registerUser = async (formData: any) => {
     throw error;
   }
 };
-// ... (Copiar el resto de funciones que ya tenías: eliminateUser, changePassword, etc.)
+
 export const eliminateUser = async (email: string, password: string) => {
   try {
     const response = await axios.delete(`${API_URL}/users/delete`, {

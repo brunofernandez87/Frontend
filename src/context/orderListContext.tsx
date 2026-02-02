@@ -1,6 +1,5 @@
 import { createContext, useContext, useEffect, useMemo, useState } from "react";
 import { useUser } from "./userContext";
-// import orderMock from "../mock/orderMock.json";
 import { getAllOrders } from "../services/orderService";
 const orderListContext = createContext(null);
 export default function OrderListProvider({ children }) {

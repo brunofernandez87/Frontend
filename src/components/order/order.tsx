@@ -140,14 +140,12 @@ export default function Order() {
         </div>
       </div>
 
-      {/* Lista de Tarjetas */}
       <div className="order-card-wrapper">
         {orderFilter.map((o) => {
           const isEditing = editOrderId === o.id_order;
           const usernameDisplay = getUserName(o.id_user);
           return (
             <div key={o.id_order} className="order-card">
-              {/* IZQUIERDA: Información Clickable */}
               <Link
                 to={`/orderDetail/${o?.id_order}`}
                 className="order-details-link"
@@ -167,7 +165,6 @@ export default function Order() {
                 </div>
               </Link>
 
-              {/* DERECHA: Acciones de Administrador */}
               <div className="admin-actions-container">
                 {user?.rol === "vendedor" && o.state !== "entregado" && (
                   <>
@@ -220,7 +217,6 @@ export default function Order() {
         })}
       </div>
 
-      {/* Paginación */}
       <div className="pagination-container">
         {page > 1 && (
           <button className="Next-Page" onClick={handleClickPrevious}>
