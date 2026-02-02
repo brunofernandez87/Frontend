@@ -1,6 +1,5 @@
 import { createContext, useContext, useEffect, useState } from "react";
 import { getAllProducts } from "../services/productService";
-// import productMock from "../mock/productMock.json";
 const productListContext = createContext(null);
 export function ProductListProvider({ children }) {
   const [productList, setproductList] = useState([]);
